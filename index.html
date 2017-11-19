@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="http://bootstrap-3.ru/assets/ico/favicon.ico">
+
+    <title>Document JS</title>
+    <link href="./src/bootstrap.min.css" rel="stylesheet">
+    <link href="./src/starter-template.css" rel="stylesheet">
+</head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          </button>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">JavaScript</a></li>
+            <li><a href="#about">HTML</a></li>
+            <li><a href="#contact">CSS</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+<div class="container">
+
+      <div class="starter-template">
+<p class="lead">
+<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="color:#00f">&lt;</span><span style="color:#6782d3">script</span><span style="color:#00f">></span>
+<span style="color:#6782d3">var</span> <span style="color:#6782d3">v</span> <span style="color:#00f">=</span> <span style="color:#6782d3">console</span>;
+<span style="color:#6782d3">var</span> <span style="color:#6782d3">d</span> <span style="color:#00f">=</span> <span style="color:#6782d3">document</span>;
+<span style="color:#00f">&lt;</span><span style="color:#00f">/</span><span style="color:#6782d3">script</span><span style="color:#00f">></span>
+</pre>
+</p>
+<h4>ООП, this, конструктор, прототипы</h4>
+<p class="lead">
+<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="font-weight:700">function</span> <span style="color:#ff8000">MAN</span>(name){
+    this.a <span style="color:#00f">=</span> <span style="color:#06f">5</span>;
+    this.<span style="color:#6782d3">name</span> <span style="color:#00f">=</span> name;
+};
+<span style="color:#33f;font-weight:700">MAN</span>.<span style="color:#6782d3">prototype</span> <span style="color:#00f">=</span> {
+    <span style="color:#ff8000">hi</span>: <span style="font-weight:700">function</span>(){
+        v<span style="color:#33f;font-weight:700">.log</span>(`Hi, <span style="color:#00f">$</span>{this.<span style="color:#6782d3">name</span>}`)
+    },
+    <span style="color:#ff8000">by</span>: <span style="font-weight:700">function</span>(){
+        v<span style="color:#33f;font-weight:700">.log</span>(`By, <span style="color:#00f">$</span>{this.<span style="color:#6782d3">name</span>}`)
+    }
+} <span style="color:#06f;font-style:italic">// таким способом можно делать и а и name</span>
+<span style="font-weight:700">var</span> vova <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="">MAN</span>()
+vova.hi();
+vova.by();
+
+
+<span style="font-weight:700">var</span> ob1 <span style="color:#00f">=</span> {a: <span style="color:#06f">5</span>};
+<span style="font-weight:700">var</span> ob2 <span style="color:#00f">=</span> {b: <span style="color:#06f">7</span>};
+ob1.__proto__ <span style="color:#00f">=</span> ob2
+v<span style="color:#33f;font-weight:700">.log</span>(ob1.b) <span style="color:#06f;font-style:italic">//7 положили в прототип обьекта другой обьект. Теперь у этого обьекта есть свойства и методы другого обьекта</span>
+ob1.<span style="color:#33f;font-weight:700">toString</span>() <span style="color:#06f;font-style:italic">// При этом у обьекта остаются системные свойства (ищет сперва у родителя, не находит, и ищет дальше)</span>
+</pre></pre>	
+</p>
+<p class="lead">
+<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="color:#06f;font-style:italic">// что бы спиздить у обьекта его методы и свойства используют ПРИМЕСИ(MixIn):</span>
+<span style="font-weight:700">function</span> <span style="color:#ff8000">ANIMAL</span>(name){ <span style="color:#06f;font-style:italic">// создали новый коструктор</span>
+    this.<span style="color:#6782d3">name</span> <span style="color:#00f">=</span> name;
+}
+<span style="color:#00f">for</span>(<span style="font-weight:700">var</span> key <span style="color:#00f">in</span> vova){
+    ANIMAL.<span style="color:#6782d3">prototype</span>[key] <span style="color:#00f">=</span> vova[key]; <span style="color:#06f;font-style:italic">// собственно, пиздим у обьекта vova (экземпляр MAN)</span>
+}
+<span style="color:#00f">new</span> <span style="">ANIMAL</span>(<span style="color:#093">"Tolik"</span>).hi() <span style="color:#06f;font-style:italic">// Hi, Tolik</span>
+
+<span style="color:#06f;font-style:italic">// современный подход Object.create (как в примере с __proto__)</span>
+<span style="color:#06f;font-style:italic">// суть: не нужно два обьекта. Второй создаем на лету чз. var</span>
+<span style="font-weight:700">var</span> ob3 <span style="color:#00f">=</span> {a: <span style="color:#06f">15</span>};
+<span style="font-weight:700">var</span> ob4 <span style="color:#00f">=</span> <span style="color:#33f;font-weight:700">Object</span>.create(ob3);
+ob4.on <span style="color:#00f">=</span> <span style="color:#093">"true"</span>; <span style="color:#06f;font-style:italic">//просто добавили свойство в новый об</span>
+<span style="color:#33f;font-weight:700">ob4</span>.<span style="color:#ff8000">hi</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span>(){<span style="color:#00f">return</span> <span style="color:#093">"Hi"</span>} <span style="color:#06f;font-style:italic">// просто метод</span>
+
+v<span style="color:#33f;font-weight:700">.log</span>(ob4)
+
+v<span style="color:#33f;font-weight:700">.log</span>(ob4.hasOwnProperty(<span style="color:#093">"on"</span>)) <span style="color:#06f;font-style:italic">//проверка на спижженое свойство/метод</span>
+v<span style="color:#33f;font-weight:700">.log</span>(ob4.hasOwnProperty(<span style="color:#093">"hi"</span>))
+v<span style="color:#33f;font-weight:700">.log</span>(ob4.hasOwnProperty(<span style="color:#093">"a"</span>))
+
+<span style="font-weight:700">var</span> full <span style="color:#00f">=</span> <span style="color:#00f">$</span>.extend({}, ob1, ob2, ob3, ob4, vova) <span style="color:#06f;font-style:italic">//$.extend - склеивает кучу обьектов (extend - расширять, продлевать)</span>
+</pre>
+</p>
+<p class="lead">
+<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="color:#06f;font-style:italic">//ИТОГО</span>
+<span style="color:#06f;font-style:italic">// КЛАСС - это функция конструктор и обьект записаный в ее свойство прототип:</span>
+        <span style="font-weight:700">function</span> <span style="color:#ff8000">FK</span>(){
+        <span style="color:#06f;font-style:italic">//  ...</span>
+            this.prop
+        <span style="color:#06f;font-style:italic">//  ...</span>
+        }
+        <span style="color:#33f;font-weight:700">FK</span>.<span style="color:#6782d3">prototype</span> <span style="color:#00f">=</span> {
+            <span style="color:#ff8000">ask</span>: <span style="font-weight:700">function</span>(){},
+            <span style="color:#ff8000">say</span>: <span style="font-weight:700">function</span>(){},
+            <span style="color:#ff8000">doit</span>:  <span style="font-weight:700">function</span>(){},
+        }
+</pre>
+</p>
+<p class="lead">
+<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="color:#06f;font-style:italic">// Полноценная реализация</span>
+<span style="color:#06f;font-style:italic">//создаем два класса</span>
+<span style="font-weight:700">function</span> <span style="color:#ff8000">Car</span>(marka){ <span style="color:#06f;font-style:italic">// КЛАСС 1</span>
+    this.marka <span style="color:#00f">=</span> marka;
+    this.old <span style="color:#00f">=</span> <span style="color:#06f">5</span>;
+}
+<span style="color:#33f;font-weight:700">Car</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">getMarka</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span>(){
+    v<span style="color:#33f;font-weight:700">.log</span>(this.marka);
+};
+<span style="color:#33f;font-weight:700">Car</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">getOld</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span>(){
+    v<span style="color:#33f;font-weight:700">.log</span>(this.old);
+};
+<span style="color:#33f;font-weight:700">Car</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">setold</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span>(old){
+    v<span style="color:#33f;font-weight:700">.log</span>(this.old <span style="color:#00f">=</span> old);
+};
+let emmy <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="">Car</span>(<span style="color:#093">"Emgrand"</span>);
+emmy.getMarka();
+emmy.getOld();
+emmy.setold(<span style="color:#093">"10"</span>);
+
+<span style="font-weight:700">function</span> <span style="color:#ff8000">Room</span>(name){ <span style="color:#06f;font-style:italic">// КЛАСС 2</span>
+    this.<span style="color:#6782d3">name</span> <span style="color:#00f">=</span> name;
+    this.array <span style="color:#00f">=</span> <span style="color:#06f">18</span>;
+    this.free <span style="color:#00f">=</span> <span style="color:#9700cc">true</span>;
+    Car.<span style="color:#33f;font-weight:700">apply</span>(this, arguments) <span style="color:#06f;font-style:italic">// НАСЛЕДУЕМ СВОЙСТВА</span>
+}
+
+
+<span style="color:#33f;font-weight:700">Room</span>.<span style="color:#6782d3">prototype</span> <span style="color:#00f">=</span> <span style="color:#33f;font-weight:700">Object</span>.create(Car.<span style="color:#6782d3">prototype</span>); <span style="color:#06f;font-style:italic">// НАСЛЕДУЕМ МЕТОДЫ (родитель Car)</span>
+
+<span style="color:#06f;font-style:italic">// добавляем в Room функциона</span>
+<span style="color:#33f;font-weight:700">Room</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">getRoom</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span>(){
+    v<span style="color:#33f;font-weight:700">.log</span>(this.<span style="color:#6782d3">name</span>);
+};
+<span style="color:#33f;font-weight:700">Room</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">getArray</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span>(){
+    v<span style="color:#33f;font-weight:700">.log</span>(this.array);
+};
+<span style="color:#33f;font-weight:700">Room</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">setArray</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span>(array){
+    v<span style="color:#33f;font-weight:700">.log</span>(this.array <span style="color:#00f">=</span> array);
+};
+
+let home <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="">Room</span>(<span style="color:#093">"Hata"</span>);
+home.getRoom();
+home.getArray();
+home.setArray(<span style="color:#093">"56"</span>);
+
+<span style="color:#06f;font-style:italic">// создаем цепочку Room - Room.prototype - Car.prototype ?????</span>
+
+<span style="color:#06f;font-style:italic">//v.log(emmy);</span>
+<span style="color:#06f;font-style:italic">//v.log(home);</span>
+</pre>
+</p>
+<p class="lead">
+<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="color:#06f;font-style:italic">// свой</span>
+<span style="font-weight:700">function</span> <span style="color:#ff8000">Car</span>(name, color){
+    this.<span style="color:#6782d3">name</span> <span style="color:#00f">=</span> name;
+    this.<span style="color:#6782d3">color</span> <span style="color:#00f">=</span> color;
+};
+<span style="color:#33f;font-weight:700">Car</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">hi</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span>(){v<span style="color:#33f;font-weight:700">.log</span>(<span style="color:#093">"Hi, "</span> <span style="color:#00f">+</span> this.<span style="color:#6782d3">name</span>)}
+<span style="color:#33f;font-weight:700">Car</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">col</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span>(){v<span style="color:#33f;font-weight:700">.log</span>(<span style="color:#093">"color is "</span> <span style="color:#00f">+</span> this.<span style="color:#6782d3">color</span>)}
+<span style="font-weight:700">var</span> a <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="">Car</span>(<span style="color:#093">"BMW"</span>, <span style="color:#093">"white"</span>);
+
+<span style="color:#33f;font-weight:700">Bus</span>.<span style="color:#6782d3">prototype</span> <span style="color:#00f">=</span> <span style="color:#33f;font-weight:700">Object</span>.create(Car.<span style="color:#6782d3">prototype</span>)
+
+<span style="font-weight:700">function</span> <span style="color:#ff8000">Bus</span>(name){
+    this.hg <span style="color:#00f">=</span> <span style="color:#093">"3.5m"</span>;
+    this.wt <span style="color:#00f">=</span> <span style="color:#093">"50t."</span>;
+    Car.<span style="color:#33f;font-weight:700">apply</span>(this, arguments);
+};
+<span style="color:#33f;font-weight:700">Bus</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">parh</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span>(){v<span style="color:#33f;font-weight:700">.log</span>(<span style="color:#093">"Ves, "</span> <span style="color:#00f">+</span> this.hg)};
+<span style="color:#33f;font-weight:700">Bus</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">parw</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span>(){v<span style="color:#33f;font-weight:700">.log</span>(<span style="color:#093">"Visota "</span> <span style="color:#00f">+</span> this.wt)};
+<span style="color:#33f;font-weight:700">Bus</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">hi</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span>(){
+    Car.<span style="color:#6782d3">prototype</span>.hi.<span style="color:#33f;font-weight:700">call</span>(this, name) <span style="color:#06f;font-style:italic">// перекрываем цепочку прототипов родительским методом</span>
+    v<span style="color:#33f;font-weight:700">.log</span>(<span style="color:#093">"Bus Hi"</span>);
+}
+<span style="font-weight:700">var</span> b <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="">Bus</span>(<span style="color:#093">"Ikarus"</span>);
+</pre>
+</p>
+<p class="lead">
+<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="color:#06f;font-style:italic">// Разрыв конструкции Bus строчкой с Object.create нарушает целостность кода.</span>
+<span style="color:#06f;font-style:italic">// Выход: ФУНКЦИЯ НАСЛЕДОВАНИЯ</span>
+<span style="color:#06f;font-style:italic">// Окончательный оптимальный вариант</span>
+<span style="font-weight:700">function</span> <span style="color:#ff8000">Car</span>(name, color){
+    this.<span style="color:#6782d3">name</span> <span style="color:#00f">=</span> name;
+    this.<span style="color:#6782d3">color</span> <span style="color:#00f">=</span> color;
+};
+<span style="color:#33f;font-weight:700">Car</span>.<span style="color:#6782d3">prototype</span> <span style="color:#00f">=</span> {
+    <span style="color:#ff8000">hi</span>:  <span style="font-weight:700">function</span>(){v<span style="color:#33f;font-weight:700">.log</span>(<span style="color:#093">"Hi, "</span> <span style="color:#00f">+</span> this.<span style="color:#6782d3">name</span>)},
+    <span style="color:#ff8000">col</span>: <span style="font-weight:700">function</span>(){v<span style="color:#33f;font-weight:700">.log</span>(<span style="color:#093">"color is "</span> <span style="color:#00f">+</span> this.<span style="color:#6782d3">color</span>)}
+};
+
+<span style="font-weight:700">function</span> <span style="color:#ff8000">Bus</span>(name){
+    this.hg <span style="color:#00f">=</span> <span style="color:#093">"3.5m"</span>;
+    this.wt <span style="color:#00f">=</span> <span style="color:#093">"50t."</span>;
+    Car.<span style="color:#33f;font-weight:700">apply</span>(this, arguments);
+};
+<span style="color:#33f;font-weight:700">Bus</span>.<span style="color:#6782d3">prototype</span> <span style="color:#00f">=</span> {
+    <span style="color:#ff8000">parh</span>: <span style="font-weight:700">function</span>(){v<span style="color:#33f;font-weight:700">.log</span>(<span style="color:#093">"Ves, "</span> <span style="color:#00f">+</span> this.hg)},
+    <span style="color:#ff8000">parw</span>: <span style="font-weight:700">function</span>(){v<span style="color:#33f;font-weight:700">.log</span>(<span style="color:#093">"Visota "</span> <span style="color:#00f">+</span> this.wt)},
+    <span style="color:#ff8000">hi</span>: <span style="font-weight:700">function</span>(){
+        Car.<span style="color:#6782d3">prototype</span>.hi.<span style="color:#33f;font-weight:700">call</span>(this, name) <span style="color:#06f;font-style:italic">// перекрываем цепочку прототипов родительским методом</span>
+        v<span style="color:#33f;font-weight:700">.log</span>(<span style="color:#093">"Bus Hi"</span>)
+    }
+}
+inheritance(Car, Bus) <span style="color:#06f;font-style:italic">// ФУНКЦИЯ НАСЛЕДОВАНИЯ</span>
+<span style="font-weight:700">var</span> b <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="">Bus</span>(<span style="color:#093">"Ikarus"</span>)
+
+<span style="color:#06f;font-style:italic">//Bus.prototype = Object.create(Car.prototype)</span>
+<span style="font-weight:700">function</span> <span style="color:#ff8000">inheritance</span>(Par, Chi){ <span style="color:#06f;font-style:italic">// ФУНКЦИЯ НАСЛЕДОВАНИЯ реализация</span>
+    <span style="font-weight:700">var</span> tmpChi <span style="color:#00f">=</span> Chi.<span style="color:#6782d3">prototype</span>;
+    <span style="color:#00f">if</span>(<span style="color:#33f;font-weight:700">Object</span>.create){
+        <span style="color:#33f;font-weight:700">child</span>.<span style="color:#6782d3">prototype</span> <span style="color:#00f">=</span> <span style="color:#33f;font-weight:700">Object</span>.create(parent.<span style="color:#6782d3">prototype</span>)
+    } <span style="color:#00f">else</span>{
+        <span style="font-weight:700">function</span> <span style="color:#ff8000">F</span>(){};
+        <span style="color:#33f;font-weight:700">F</span>.<span style="color:#6782d3">prototype</span> <span style="color:#00f">=</span> Par.<span style="color:#6782d3">prototype</span>;
+        <span style="color:#33f;font-weight:700">Chi</span>.<span style="color:#6782d3">prototype</span> <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="">F</span>();
+    };
+    <span style="color:#00f">for</span>( key <span style="color:#00f">in</span> tmpChi){
+        <span style="color:#00f">if</span>(tmpChi.hasOwnProperty(key)){
+            Chi.<span style="color:#6782d3">prototype</span>[key] <span style="color:#00f">=</span> tmpChi[key]
+        }
+    }
+}
+</pre>
+</p>
+<p class="lead">
+<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="font-weight:700">function</span> <span style="color:#ff8000">Car</span>(name, color){
+    this.<span style="color:#6782d3">name</span> <span style="color:#00f">=</span> name;
+    this.<span style="color:#6782d3">color</span> <span style="color:#00f">=</span> color;
+};
+<span style="color:#33f;font-weight:700">Car</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">hi</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span>(){v<span style="color:#33f;font-weight:700">.log</span>(<span style="color:#093">"Hi, "</span> <span style="color:#00f">+</span> this.<span style="color:#6782d3">name</span>)}
+<span style="color:#33f;font-weight:700">Car</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">col</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span>(){v<span style="color:#33f;font-weight:700">.log</span>(<span style="color:#093">"color is "</span> <span style="color:#00f">+</span> this.<span style="color:#6782d3">color</span>)}
+<span style="font-weight:700">var</span> a <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="">Car</span>(<span style="color:#093">"BMW"</span>, <span style="color:#093">"white"</span>);
+
+<span style="color:#33f;font-weight:700">Bus</span>.<span style="color:#6782d3">prototype</span> <span style="color:#00f">=</span> <span style="color:#33f;font-weight:700">Object</span>.create(Car.<span style="color:#6782d3">prototype</span>)
+
+<span style="font-weight:700">function</span> <span style="color:#ff8000">Bus</span>(name){
+    this.hg <span style="color:#00f">=</span> <span style="color:#093">"3.5m"</span>;
+    this.wt <span style="color:#00f">=</span> <span style="color:#093">"50t."</span>;
+    Car.<span style="color:#33f;font-weight:700">apply</span>(this, arguments);
+};
+<span style="color:#33f;font-weight:700">Bus</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">parh</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span>(){v<span style="color:#33f;font-weight:700">.log</span>(<span style="color:#093">"Ves, "</span> <span style="color:#00f">+</span> this.hg)};
+<span style="color:#33f;font-weight:700">Bus</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">parw</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span>(){v<span style="color:#33f;font-weight:700">.log</span>(<span style="color:#093">"Visota "</span> <span style="color:#00f">+</span> this.wt)};
+<span style="color:#33f;font-weight:700">Bus</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">hi</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span>(){
+    Car.<span style="color:#6782d3">prototype</span>.hi.<span style="color:#33f;font-weight:700">call</span>(this, name) <span style="color:#06f;font-style:italic">// перекрываем цепочку прототипов родительским методом</span>
+    v<span style="color:#33f;font-weight:700">.log</span>(<span style="color:#093">"Bus Hi"</span>);
+}
+<span style="font-weight:700">var</span> b <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="">Bus</span>(<span style="color:#093">"Ikarus"</span>);
+</pre>
+</p>
+<p class="lead">
+<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="color:#06f;font-style:italic">//ES6</span>
+<span style="font-weight:700">class</span> Car{
+    constructor(name, age){
+        Car.count <span style="color:#00f">=</span> <span style="color:#00f">++</span>Car.count <span style="color:#00f">||</span> <span style="color:#06f">0</span>;
+        this.num <span style="color:#00f">=</span> Car.count;
+        this.age <span style="color:#00f">=</span> age;
+        this.<span style="color:#6782d3">name</span> <span style="color:#00f">=</span> name;
+        this.<span style="color:#6782d3">color</span> <span style="color:#00f">=</span> <span style="color:#093">"red"</span>;
+    };
+    get doit(){
+        v<span style="color:#33f;font-weight:700">.log</span>(this.<span style="color:#6782d3">name</span>.<span style="color:#33f;font-weight:700">toUpperCase</span>())
+    };
+    set doit(name){
+        this.<span style="color:#6782d3">name</span> <span style="color:#00f">=</span> name;
+        v<span style="color:#33f;font-weight:700">.log</span>(this.<span style="color:#6782d3">name</span>)
+    };
+    hi(){
+        v<span style="color:#33f;font-weight:700">.log</span>(<span style="color:#093">"Hi,"</span> <span style="color:#00f">+</span> this.<span style="color:#6782d3">name</span>);
+    }
+}
+
+<span style="font-weight:700">class</span> Bus <span style="font-weight:700">extends</span> Car{
+    constructor(name, age){
+        
+        super(<span style="color:#093">"Pidr"</span>, <span style="color:#06f">15</span>);
+
+    };
+        hi(){
+            super.hi();
+            v<span style="color:#33f;font-weight:700">.log</span>(<span style="color:#093">"HALLOOO"</span>) <span style="color:#06f;font-style:italic">// дописываем родительский метод своим</span>
+        };
+}
+let b <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="">Car</span>(<span style="color:#093">"Mashina"</span>);
+<span style="color:#06f;font-style:italic">//let c = new Bus("Irarus");</span>
+let b2 <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="">Car</span>(<span style="color:#093">"Irarus"</span>);
+let b3 <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="">Car</span>(<span style="color:#093">"Irarus"</span>);
+</pre>
+</p>
+<h4>Сортировка моя</h4>
+<p class="lead">
+<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="color:#33f;font-weight:700">Array</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">upp</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span> (){<span style="color:#00f">return</span> this.<span style="color:#33f;font-weight:700">sort</span>(<span style="font-weight:700">function</span>(a,b){<span style="color:#00f">return</span> a<span style="color:#00f">-</span>b} )};
+<span style="color:#33f;font-weight:700">Array</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">down</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span> (){<span style="color:#00f">return</span> this.<span style="color:#33f;font-weight:700">sort</span>(<span style="font-weight:700">function</span>(a,b){<span style="color:#00f">return</span> b<span style="color:#00f">-</span>a} )};
+
+<span style="font-weight:700">var</span> arr <span style="color:#00f">=</span> [<span style="color:#06f">1</span>,<span style="color:#06f">5</span>,<span style="color:#06f">12</span>,<span style="color:#06f">7</span>,<span style="color:#06f">102</span>,<span style="color:#06f">54</span>,<span style="color:#06f">72</span>]
+
+v<span style="color:#33f;font-weight:700">.log</span>( arr.<span style="color:#33f;font-weight:700">sort</span>() )
+
+v<span style="color:#33f;font-weight:700">.log</span>( arr.upp() )
+v<span style="color:#33f;font-weight:700">.log</span>( arr.down() )
+</pre>
+</p>
+<h4>localStorage</h4>
+<p class="lead">
+<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="font-weight:700">var</span> el <span style="color:#00f">=</span> <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">getElementById</span>(<span style="color:#093">"but"</span>);
+<span style="font-weight:700">var</span> el2 <span style="color:#00f">=</span> <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">getElementById</span>(<span style="color:#093">"butClearLS"</span>);
+<span style="font-weight:700">var</span> inp <span style="color:#00f">=</span> <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">getElementById</span>(<span style="color:#093">"inp"</span>);
+<span style="font-weight:700">var</span> u <span style="color:#00f">=</span> <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">getElementById</span>(<span style="color:#093">"u"</span>);
+
+v<span style="color:#33f;font-weight:700">.log</span>(localStorage)
+
+<span style="color:#33f;font-weight:700">el</span>.<span style="color:#ff8000">onclick</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span>(){
+    <span style="font-weight:700">var</span> li <span style="color:#00f">=</span> <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">createElement</span>(<span style="color:#093">"li"</span>);
+        <span style="color:#00f">if</span>(inp.<span style="color:#6782d3">value</span> <span style="color:#00f">==</span> <span style="color:#093">""</span>){inp.<span style="color:#6782d3">value</span> <span style="color:#00f">==</span> <span style="color:#093">"пусто"</span>} <span style="color:#00f">else</span>{
+    li.innerHTML <span style="color:#00f">=</span> inp.<span style="color:#6782d3">value</span>;
+    localStorage.setItem(inp.<span style="color:#6782d3">value</span>, inp.<span style="color:#6782d3">value</span>)
+    u.<span style="color:#33f;font-weight:700">appendChild</span>(li);
+    inp.<span style="color:#6782d3">value</span> <span style="color:#00f">=</span> <span style="color:#093">""</span>;
+    v<span style="color:#33f;font-weight:700">.log</span>(localStorage)
+    }
+};
+
+<span style="color:#33f;font-weight:700">el2</span>.<span style="color:#ff8000">onclick</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span>(){
+    localStorage.<span style="color:#33f;font-weight:700">clear</span>();
+    v<span style="color:#33f;font-weight:700">.log</span>(localStorage)
+}
+</pre>
+</p>
+<p class="lead">
+<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="color:#06f;font-style:italic">// работа с обьектом</span>
+<span style="font-weight:700">var</span> obj <span style="color:#00f">=</span> {
+    item1: <span style="color:#06f">1</span>,
+    item2: [<span style="color:#06f">123</span>, <span style="color:#093">"two"</span>, <span style="color:#06f">3.0</span>],
+    item3:<span style="color:#093">"hello"</span>
+};
+
+<span style="font-weight:700">var</span> serialObj <span style="color:#00f">=</span> JSON.stringify(obj);
+localStorage.setItem(<span style="color:#093">"Name"</span>, serialObj)
+v<span style="color:#33f;font-weight:700">.log</span>(serialObj)
+
+<span style="font-weight:700">var</span> returnObj <span style="color:#00f">=</span> JSON.<span style="color:#33f;font-weight:700">parse</span>(localStorage.getItem(<span style="color:#093">"Name"</span>))
+v<span style="color:#33f;font-weight:700">.log</span>(returnObj)
+</pre>
+</p>
+
+
+
+
+<p class="lead">
+
+</p>
+      </div>
+
+</div>
+
+<script src="./src/jquery.min.js"></script>
+<script src="./src/bootstrap.min.js"></script>
+<div id="wt-sky-root"></div></body></html>
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+mail: kasjdflaskdg@ukr.net //23020023
+vlog.zzz.com.ua
+FTP:
+login: vlog //vLog23020023
+ -->
