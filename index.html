@@ -727,6 +727,124 @@ v.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</s
 v.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span> computedStyle.<span style="color: #660066;">color</span> <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #006600; font-style: italic;">// выведет цвет</span>
 v.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>computedStyle<span style="color: #009900;">&#41;</span></pre>
 
+<h4>Всплытие true / Перехват false // Bubbling/Capchure</h4>
+<pre class="javascript" style="font-family:monospace;">document.<span style="color: #660066;">body</span>.<span style="color: #660066;">addEventListener</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;click&quot;</span><span style="color: #339933;">,</span> <span style="color: #000066; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+	v.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;This is a body&quot;</span><span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#125;</span><span style="color: #339933;">,</span> <span style="color: #003366; font-weight: bold;">true</span> <span style="color: #009900;">&#41;</span>
+&nbsp;
+container.<span style="color: #660066;">addEventListener</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;click&quot;</span><span style="color: #339933;">,</span> <span style="color: #000066; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+	v.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;This is a DIV&quot;</span><span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#125;</span><span style="color: #339933;">,</span> <span style="color: #003366; font-weight: bold;">false</span> <span style="color: #009900;">&#41;</span>
+&nbsp;
+button1.<span style="color: #660066;">addEventListener</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;click&quot;</span><span style="color: #339933;">,</span> <span style="color: #000066; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+	v.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;This is a BUTTON in DIV&quot;</span><span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#125;</span><span style="color: #339933;">,</span> <span style="color: #003366; font-weight: bold;">true</span> <span style="color: #009900;">&#41;</span></pre>
+
+<h4>Удаление события по умолчанию / preventDefault()</h4>
+<pre class="javascript" style="font-family:monospace;"><span style="color: #006600; font-style: italic;">//Удаление события по умолчанию</span>
+<span style="color: #006600; font-style: italic;">//Здесь при нажатии на кнопку должен происходить метод POST. Но если поле формы пустое то событие отменяется </span>
+<span style="color: #006600; font-style: italic;">//preventDefault</span>
+&nbsp;
+document.<span style="color: #660066;">forms</span><span style="color: #009900;">&#91;</span><span style="color: #CC0000;">0</span><span style="color: #009900;">&#93;</span>.<span style="color: #660066;">addEventListener</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;&quot;</span>submit<span style="color: #3366CC;">&quot;&quot;</span><span style="color: #339933;">,</span> <span style="color: #000066; font-weight: bold;">function</span> <span style="color: #009900;">&#40;</span>e<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+	<span style="color: #000066; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>document.<span style="color: #660066;">getElementById</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;&quot;</span>nameInput<span style="color: #3366CC;">&quot;&quot;</span><span style="color: #009900;">&#41;</span>.<span style="color: #660066;">value</span>.<span style="color: #660066;">length</span> <span style="color: #339933;">==</span> <span style="color: #CC0000;">0</span><span style="color: #009900;">&#41;</span>
+	<span style="color: #009900;">&#123;</span>
+	   <span style="color: #006600; font-style: italic;">// Если поле ввода пустое отменить действие по умолчанию, которое связанно с событием.</span>
+	   e.<span style="color: #660066;">preventDefault</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	   alert<span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;&quot;</span>Введите имя<span style="color: #3366CC;">&quot;&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span><span style="color: #339933;">,</span> <span style="color: #003366; font-weight: bold;">false</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre>
+<pre class="javascript" style="font-family:monospace;"><span style="color: #006600; font-style: italic;">//________________________________</span>
+&nbsp;
+but.<span style="color: #660066;">onclick</span> <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span>e<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+	<span style="color: #000066; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span>inp.<span style="color: #660066;">value</span>.<span style="color: #660066;">length</span> <span style="color: #339933;">==</span> <span style="color: #CC0000;">0</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+		e.<span style="color: #660066;">preventDefault</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #000066; font-weight: bold;">throw</span> <span style="color: #000066; font-weight: bold;">new</span> Error<span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;UPS&quot;</span><span style="color: #009900;">&#41;</span> <span style="color: #006600; font-style: italic;">// My Eroor</span>
+	<span style="color: #009900;">&#125;</span> <span style="color: #000066; font-weight: bold;">else</span><span style="color: #009900;">&#123;</span>
+		v.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>inp.<span style="color: #660066;">value</span><span style="color: #009900;">&#41;</span>
+		inp.<span style="color: #660066;">value</span> <span style="color: #339933;">=</span> <span style="color: #3366CC;">&quot;&quot;</span>
+		inp.<span style="color: #660066;">focus</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>		
+	<span style="color: #009900;">&#125;</span>	
+<span style="color: #009900;">&#125;</span></pre>
+<pre class="javascript" style="font-family:monospace;"><span style="color: #006600; font-style: italic;">//______________________________</span>
+inp.<span style="color: #660066;">addEventListener</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;keypress&quot;</span><span style="color: #339933;">,</span> <span style="color: #000066; font-weight: bold;">function</span> <span style="color: #009900;">&#40;</span>e<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+	<span style="color: #000066; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span><span style="">String</span>.<span style="color: #660066;">fromCharCode</span><span style="color: #009900;">&#40;</span>e.<span style="color: #660066;">charCode</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">!=</span> <span style="color: #3366CC;">'1'</span>
+		<span style="color: #339933;">&amp;&amp;</span> <span style="">String</span>.<span style="color: #660066;">fromCharCode</span><span style="color: #009900;">&#40;</span>e.<span style="color: #660066;">charCode</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">!=</span> <span style="color: #3366CC;">'0'</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #006600; font-style: italic;">// если нажатая кнопка не 0 или 1 отменить действие по умолчанию.</span>
+		e.<span style="color: #660066;">preventDefault</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span><span style="color: #339933;">,</span> <span style="color: #003366; font-weight: bold;">true</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre>
+
+<h4>e.stopPropagation() //Остановка сценария</h4>
+<pre class="javascript" style="font-family:monospace;"><span style="color: #000066; font-weight: bold;">var</span> isTunnel <span style="color: #339933;">=</span> <span style="color: #003366; font-weight: bold;">true</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000066; font-weight: bold;">var</span> e1 <span style="color: #339933;">=</span> document.<span style="color: #660066;">getElementById</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;first&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000066; font-weight: bold;">var</span> e2 <span style="color: #339933;">=</span> document.<span style="color: #660066;">getElementById</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;second&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000066; font-weight: bold;">var</span> e3 <span style="color: #339933;">=</span> document.<span style="color: #660066;">getElementById</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;third&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+e1.<span style="color: #660066;">addEventListener</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;click&quot;</span><span style="color: #339933;">,</span>
+	<span style="color: #006600; font-style: italic;">// e - параметр хранит объект с информацией о событии.</span>
+	<span style="color: #000066; font-weight: bold;">function</span> <span style="color: #009900;">&#40;</span>e<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>		
+		<span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">style</span>.<span style="color: #660066;">backgroundColor</span> <span style="color: #339933;">=</span> <span style="color: #3366CC;">&quot;green&quot;</span><span style="color: #339933;">;</span>
+		alert<span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;Обработчик DIV 1&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #006600; font-style: italic;">// прекращение дальнейшего маршрута события.</span>
+		e.<span style="color: #660066;">stopPropagation</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span><span style="color: #339933;">,</span>
+isTunnel<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+e2.<span style="color: #660066;">addEventListener</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;click&quot;</span><span style="color: #339933;">,</span>
+	<span style="color: #000066; font-weight: bold;">function</span> <span style="color: #009900;">&#40;</span>e<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">style</span>.<span style="color: #660066;">backgroundColor</span> <span style="color: #339933;">=</span> <span style="color: #3366CC;">&quot;yellow&quot;</span><span style="color: #339933;">;</span>
+		alert<span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;Обработчик DIV 2&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		e.<span style="color: #660066;">stopPropagation</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span><span style="color: #339933;">,</span>
+isTunnel<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+e3.<span style="color: #660066;">addEventListener</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;click&quot;</span><span style="color: #339933;">,</span>
+	<span style="color: #000066; font-weight: bold;">function</span> <span style="color: #009900;">&#40;</span>e<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">style</span>.<span style="color: #660066;">backgroundColor</span> <span style="color: #339933;">=</span> <span style="color: #3366CC;">&quot;red&quot;</span><span style="color: #339933;">;</span>
+		alert<span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;Обработчик DIV 3&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		e.<span style="color: #660066;">stopPropagation</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span><span style="color: #339933;">,</span>
+isTunnel<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre>
+
+<h4>События // Handlers</h4>
+<pre class="javascript" style="font-family:monospace;"><span style="color: #000066; font-weight: bold;">function</span> handler<span style="color: #009900;">&#40;</span>e<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+	<span style="color: #000066; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span>e<span style="color: #009900;">&#41;</span> e <span style="color: #339933;">=</span> window.<span style="color: #660066;">event</span><span style="color: #339933;">;</span> <span style="color: #006600; font-style: italic;">// получение информации о событии в IE. </span>
+&nbsp;
+	<span style="color: #000066; font-weight: bold;">var</span> message <span style="color: #339933;">=</span> <span style="color: #3366CC;">&quot;&quot;</span><span style="color: #339933;">;</span>
+	message <span style="color: #339933;">+=</span> <span style="color: #3366CC;">&quot;type: &quot;</span> <span style="color: #339933;">+</span> e.<span style="color: #660066;">type</span> <span style="color: #339933;">+</span> <span style="color: #3366CC;">&quot;&lt;br /&gt;&quot;</span><span style="color: #339933;">;</span>                    <span style="color: #006600; font-style: italic;">// тип события.</span>
+	message <span style="color: #339933;">+=</span> <span style="color: #3366CC;">&quot;srcElement:&quot;</span> <span style="color: #339933;">+</span> e.<span style="color: #660066;">srcElement</span> <span style="color: #339933;">+</span> <span style="color: #3366CC;">&quot;&lt;br /&gt;&quot;</span><span style="color: #339933;">;</span>         <span style="color: #006600; font-style: italic;">// отправитель события.</span>
+	message <span style="color: #339933;">+=</span> <span style="color: #3366CC;">&quot;button:&quot;</span> <span style="color: #339933;">+</span> e.<span style="color: #660066;">button</span> <span style="color: #339933;">+</span> <span style="color: #3366CC;">&quot;&lt;br /&gt;&quot;</span><span style="color: #339933;">;</span>                 <span style="color: #006600; font-style: italic;">// 1 - левая клавиша, 2 - правая клавиша, 4 - средняя.</span>
+	message <span style="color: #339933;">+=</span> <span style="color: #3366CC;">&quot;clientX:&quot;</span> <span style="color: #339933;">+</span> e.<span style="color: #660066;">clientX</span> <span style="color: #339933;">+</span> <span style="color: #3366CC;">&quot;&lt;br /&gt;&quot;</span><span style="color: #339933;">;</span>               <span style="color: #006600; font-style: italic;">// координаты мыши относительно окна.</span>
+	message <span style="color: #339933;">+=</span> <span style="color: #3366CC;">&quot;clientY:&quot;</span> <span style="color: #339933;">+</span> e.<span style="color: #660066;">clientY</span> <span style="color: #339933;">+</span> <span style="color: #3366CC;">&quot;&lt;br /&gt;&quot;</span><span style="color: #339933;">;</span>               <span style="color: #006600; font-style: italic;">// координаты мыши относительно окна.</span>
+	message <span style="color: #339933;">+=</span> <span style="color: #3366CC;">&quot;offsetX:&quot;</span> <span style="color: #339933;">+</span> e.<span style="color: #660066;">offsetX</span> <span style="color: #339933;">+</span> <span style="color: #3366CC;">&quot;&lt;br /&gt;&quot;</span><span style="color: #339933;">;</span>               <span style="color: #006600; font-style: italic;">// координаты относительно элемента в котором произошло событие.</span>
+	message <span style="color: #339933;">+=</span> <span style="color: #3366CC;">&quot;offsetY:&quot;</span> <span style="color: #339933;">+</span> e.<span style="color: #660066;">offsetY</span> <span style="color: #339933;">+</span> <span style="color: #3366CC;">&quot;&lt;br /&gt;&quot;</span><span style="color: #339933;">;</span>               <span style="color: #006600; font-style: italic;">// координаты относительно элемента в котором произошло событие.</span>
+	message <span style="color: #339933;">+=</span> <span style="color: #3366CC;">&quot;altKey:&quot;</span> <span style="color: #339933;">+</span> e.<span style="color: #660066;">altKey</span> <span style="color: #339933;">+</span> <span style="color: #3366CC;">&quot;&lt;br /&gt;&quot;</span><span style="color: #339933;">;</span>                 <span style="color: #006600; font-style: italic;">// true если зажата клавиша Alt</span>
+	message <span style="color: #339933;">+=</span> <span style="color: #3366CC;">&quot;ctrlKey:&quot;</span> <span style="color: #339933;">+</span> e.<span style="color: #660066;">ctrlKey</span> <span style="color: #339933;">+</span> <span style="color: #3366CC;">&quot;&lt;br /&gt;&quot;</span><span style="color: #339933;">;</span>               <span style="color: #006600; font-style: italic;">// true если зажата клавиша Ctrl</span>
+	message <span style="color: #339933;">+=</span> <span style="color: #3366CC;">&quot;shiftKey:&quot;</span> <span style="color: #339933;">+</span> e.<span style="color: #660066;">shiftKey</span> <span style="color: #339933;">+</span> <span style="color: #3366CC;">&quot;&lt;br /&gt;&quot;</span><span style="color: #339933;">;</span>             <span style="color: #006600; font-style: italic;">// true если зажата клавиша Shift</span>
+	message <span style="color: #339933;">+=</span> <span style="color: #3366CC;">&quot;keyCode:&quot;</span> <span style="color: #339933;">+</span> e.<span style="color: #660066;">keyCode</span> <span style="color: #339933;">+</span> <span style="color: #3366CC;">&quot;&lt;br /&gt;&quot;</span><span style="color: #339933;">;</span>               <span style="color: #006600; font-style: italic;">// код клавиши для события keydown и keyup или код unicode символа для события keypress</span>
+	message <span style="color: #339933;">+=</span> <span style="color: #3366CC;">&quot;cancelBubble:&quot;</span> <span style="color: #339933;">+</span> e.<span style="color: #660066;">cancelBubble</span> <span style="color: #339933;">+</span> <span style="color: #3366CC;">&quot;&lt;br /&gt;&quot;</span><span style="color: #339933;">;</span>     <span style="color: #006600; font-style: italic;">// присвоить true для предотвращения &quot;всплывания&quot; события.</span>
+	message <span style="color: #339933;">+=</span> <span style="color: #3366CC;">&quot;returnValue:&quot;</span> <span style="color: #339933;">+</span> e.<span style="color: #660066;">returnValue</span> <span style="color: #339933;">+</span> <span style="color: #3366CC;">&quot;&lt;br /&gt;&quot;</span><span style="color: #339933;">;</span>       <span style="color: #006600; font-style: italic;">// присвоить false для предотвращения выполнения операции по умолчанию.</span>
+&nbsp;
+	document.<span style="color: #660066;">body</span>.<span style="color: #660066;">innerHTML</span> <span style="color: #339933;">=</span> message<span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
