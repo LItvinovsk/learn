@@ -35,6 +35,330 @@
 <span style="color:#00f">&lt;</span><span style="color:#00f">/</span><span style="color:#6782d3">script</span><span style="color:#00f">></span>
 </pre>
 </p>
+
+<h4>Типы, сравнения</h4>
+<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="color:#06f;font-style:italic">//hasOwnProperty - возращает true, если обьект rect1 имеет свойство wight Только свойства, без прототипов</span>
+<span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>(rect1.hasOwnProperty(<span style="color:#093">"wight"</span>))
+<span style="color:#06f;font-style:italic">//А что бы узнать имеется ли значение и в свойствах и в прототипе можно использовать in                                   </span>
+<span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>( (<span style="color:#093">""</span>getArea<span style="color:#093">""</span> <span style="color:#00f">in</span> rect1) <span style="color:#00f">+</span> <span style="color:#093">""</span><span style="color:#00f">&lt;</span>br/<span style="color:#00f">></span><span style="color:#093">""</span>)                     
+
+<span style="color:#06f;font-style:italic">//"equals - специальный прописаный вручную в прототипе метод для сравнения двух обьектов</span>
+<span style="color:#06f;font-style:italic">//Равен ли один обьект другому: false / true"                       </span>
+<span style="color:#33f;font-weight:700">Rectangle</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">equals</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span> (otherObj) {
+    <span style="color:#00f">if</span> (this.<span style="color:#6782d3">width</span> <span style="color:#00f">===</span> otherObj.<span style="color:#6782d3">width</span> <span style="color:#00f">&amp;</span><span style="color:#00f">&amp;</span> this.<span style="color:#6782d3">height</span> <span style="color:#00f">===</span> otherObj.<span style="color:#6782d3">height</span>) {
+        <span style="color:#00f">return</span> <span style="color:#9700cc">true</span>;
+    }
+    <span style="color:#00f">return</span> <span style="color:#9700cc">false</span>;
+rect1.equals(rect2) <span style="color:#06f;font-style:italic">//false</span>
+
+<span style="color:#06f;font-style:italic">//compareTo - специальный прописаный вручную в прототипе метод для сравнения двух обьектов</span>
+<span style="color:#06f;font-style:italic">//Какой обьект больше, какой меньше или равен: 1 / -1 / 0                       </span>
+<span style="color:#33f;font-weight:700">Rectangle</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">compareTo</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span> (otherObject) {
+<span style="color:#00f">if</span> (this.getArea() <span style="color:#00f">></span> otherObject.getArea()) {
+    <span style="color:#00f">return</span> <span style="color:#06f">1</span>;
+}
+<span style="color:#00f">else</span> <span style="color:#00f">if</span> (this.getArea() <span style="color:#00f">&lt;</span> otherObject.getArea()) {
+    <span style="color:#00f">return</span> <span style="color:#00f">-</span><span style="color:#06f">1</span>;
+}
+<span style="color:#00f">else</span> {
+    <span style="color:#00f">return</span> <span style="color:#06f">0</span>;
+}   
+rect1.compareTo(rect2)  <span style="color:#06f;font-style:italic">//false   -1</span>
+
+<span style="color:#06f;font-style:italic">// instanceof - оператор для проверки типа объекта</span>
+<span style="font-weight:700">var</span> x <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="">Array</span>(<span style="color:#06f">10</span>);
+<span style="color:#00f">if</span> (x <span style="color:#00f">instanceof</span> <span style="color:#33f;font-weight:700">Array</span>) { <span style="color:#06f;font-style:italic">// аналог оператора is в C#</span>
+    <span style="color:#33f;font-weight:700">alert</span>(<span style="color:#093">""</span>x is array<span style="color:#093">""</span>);
+}<span style="color:#06f;font-style:italic">//x is array</span>
+
+<span style="color:#06f;font-style:italic">// typeof - оператор для получения типа объекта в виде строкового значения</span>
+<span style="font-weight:700">var</span> test <span style="color:#00f">=</span> <span style="color:#093">""</span>hello<span style="color:#093">""</span>; <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>( <span style="color:#00f">typeof</span> test);<span style="color:#06f;font-style:italic">//string</span>
+<span style="font-weight:700">var</span> test2 <span style="color:#00f">=</span> <span style="color:#06f">123</span>; <span style="color:#33f;font-weight:700">document</span>.write (<span style="color:#00f">typeof</span> test2);<span style="color:#06f;font-style:italic">//number</span>
+<span style="font-weight:700">var</span> test3 <span style="color:#00f">=</span> <span style="color:#9700cc">true</span>; <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>( <span style="color:#00f">typeof</span> test3);<span style="color:#06f;font-style:italic">//boolean</span>
+<span style="font-weight:700">var</span> test4 <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="">Array</span>(); <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>( <span style="color:#00f">typeof</span> test4);<span style="color:#06f;font-style:italic">//object       </span>
+<span style="font-weight:700">var</span> test5 <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="">Date</span>(); <span style="color:#33f;font-weight:700">document</span>.write (<span style="color:#00f">typeof</span> test5);<span style="color:#06f;font-style:italic">//object</span>
+<span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>(<span style="color:#00f">typeof</span> test6.toString); <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>(<span style="color:#00f">typeof</span> test6);<span style="color:#06f;font-style:italic">//</span>
+</pre>
+
+
+
+
+
+
+
+
+<h4>Операторы</h4>
+<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="color:#9700cc">true</span>  <span style="color:#00f">&amp;</span><span style="color:#00f">&amp;</span> <span style="color:#9700cc">true</span> <span style="color:#00f">=</span> <span style="color:#9700cc">true</span>
+<span style="color:#9700cc">false</span> <span style="color:#00f">&amp;</span><span style="color:#00f">&amp;</span> <span style="color:#9700cc">true</span> <span style="color:#00f">=</span> <span style="color:#9700cc">false</span>
+<span style="color:#9700cc">true</span>  <span style="color:#00f">&amp;</span><span style="color:#00f">&amp;</span> <span style="color:#9700cc">false</span> <span style="color:#00f">=</span> <span style="color:#9700cc">false</span>
+<span style="color:#9700cc">false</span> <span style="color:#00f">&amp;</span><span style="color:#00f">&amp;</span> <span style="color:#9700cc">false</span> <span style="color:#00f">=</span> <span style="color:#9700cc">false</span>
+_______________________
+<span style="color:#9700cc">true</span>  <span style="color:#00f">||</span> <span style="color:#9700cc">true</span> <span style="color:#00f">=</span> <span style="color:#9700cc">true</span>
+<span style="color:#9700cc">false</span> <span style="color:#00f">||</span> <span style="color:#9700cc">true</span> <span style="color:#00f">=</span> <span style="color:#9700cc">true</span>
+<span style="color:#9700cc">true</span>  <span style="color:#00f">||</span> <span style="color:#9700cc">false</span> <span style="color:#00f">=</span> <span style="color:#9700cc">true</span>
+<span style="color:#9700cc">false</span> <span style="color:#00f">||</span> <span style="color:#9700cc">false</span> <span style="color:#00f">=</span> <span style="color:#9700cc">false</span>
+</pre>
+<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="font-weight:700">var</span> a <span style="color:#00f">=</span> <span style="color:#33f;font-weight:700">prompt</span>(<span style="color:#093">"День недели"</span>, a)
+<span style="color:#00f">switch</span> (a){
+    <span style="color:#00f">case</span> <span style="color:#093">"1"</span>:
+    <span style="color:#00f">case</span> <span style="color:#093">"2"</span>:
+    <span style="color:#00f">case</span> <span style="color:#093">"3"</span>:
+    <span style="color:#00f">case</span> <span style="color:#093">"4"</span>:
+    <span style="color:#00f">case</span> <span style="color:#093">"5"</span>:
+    <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>(<span style="color:#093">"Это, сцуко, рабочий день((("</span>);
+    <span style="color:#00f">break</span>;
+    <span style="color:#00f">case</span> <span style="color:#093">"6"</span>:
+    <span style="color:#00f">case</span> <span style="color:#093">"7"</span>:
+    <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>(<span style="color:#093">"Ураа, выходной!"</span>);
+    <span style="color:#00f">break</span>;
+}
+</pre>
+
+<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="color:#06f;font-style:italic">// тернарный оператор</span>
+( условие ? Если условие ИСТИННО : Если условие ЛОЖНО )
+cost <span style="color:#00f">=</span> quantity <span style="color:#00f">>=</span> <span style="color:#06f">10</span> ? quantity <span style="color:#00f">*</span> price <span style="color:#00f">*</span> discount : quantity <span style="color:#00f">*</span> price;
+</pre>
+
+<h4>Массивы</h4>
+<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="color:#06f;font-style:italic">//________________________________________________________ split - строку в массив </span>
+<span style="font-weight:700">var</span> names <span style="color:#00f">=</span> <span style="color:#093">'Маша, Петя, Марина, Василий'</span>;
+<span style="font-weight:700">var</span> arr <span style="color:#00f">=</span> names.<span style="color:#33f;font-weight:700">split</span>(<span style="color:#093">', '</span>); <span style="color:#06f;font-style:italic">// ["Маша", "Петя", "Марина", "Василий"]</span>
+<span style="color:#093">"a,b,c,d"</span>.<span style="color:#33f;font-weight:700">split</span>(<span style="color:#093">','</span>, <span style="color:#06f">2</span>); <span style="color:#06f;font-style:italic">// a,b - второй аргумен это число значений, остальные отбрасываются</span>
+<span style="color:#093">"тест"</span>.str.<span style="color:#33f;font-weight:700">split</span>(<span style="color:#093">''</span>) ); <span style="color:#06f;font-style:italic">// т,е,с,т - пустой, разбивает по буквам</span>
+
+<span style="color:#06f;font-style:italic">// _________________________________________________________join -  массив в строку    </span>
+<span style="font-weight:700">var</span> arr <span style="color:#00f">=</span> [<span style="color:#093">'Маша'</span>, <span style="color:#093">'Петя'</span>, <span style="color:#093">'Марина'</span>, <span style="color:#093">'Василий'</span>];
+<span style="font-weight:700">var</span> str <span style="color:#00f">=</span> arr.<span style="color:#33f;font-weight:700">join</span>(<span style="color:#093">';'</span>);<span style="color:#06f;font-style:italic">// Маша;Петя;Марина;Василий </span>
+<span style="color:#00f">new</span> <span style="">Array</span>(<span style="color:#06f">4</span>).<span style="color:#33f;font-weight:700">join</span>(<span style="color:#093">"ля"</span>); <span style="color:#06f;font-style:italic">// ляляля</span>
+
+<span style="color:#06f;font-style:italic">// _________________________________________________________delete  - удаление</span>
+<span style="font-weight:700">var</span> arr <span style="color:#00f">=</span> [<span style="color:#093">"Я"</span>, <span style="color:#093">"иду"</span>, <span style="color:#093">"домой"</span>];
+<span style="color:#00f">delete</span> arr[<span style="color:#06f">1</span>]; <span style="color:#06f;font-style:italic">// ["Я", undefined, "домой"];</span>
+
+<span style="color:#06f;font-style:italic">//_________________________________________________________splice - удаление, вставка</span>
+<span style="font-weight:700">var</span> arr <span style="color:#00f">=</span> [<span style="color:#093">"Я"</span>, <span style="color:#093">"изучаю"</span>, <span style="color:#093">"JavaScript"</span>];
+<span style="color:#06f;font-style:italic">// начиная с позиции 1, удалить 1 элемент</span>
+arr.<span style="color:#33f;font-weight:700">splice</span>(<span style="color:#06f">1</span>, <span style="color:#06f">1</span>); <span style="color:#06f;font-style:italic">//["Я", "JavaScript"]</span>
+
+<span style="font-weight:700">var</span> arr <span style="color:#00f">=</span> [<span style="color:#093">"Я"</span>, <span style="color:#093">"сейчас"</span>, <span style="color:#093">"изучаю"</span>, <span style="color:#093">"JavaScript"</span>];
+<span style="color:#06f;font-style:italic">// удалить 3 первых элемента и добавить другие вместо них</span>
+arr.<span style="color:#33f;font-weight:700">splice</span>(<span style="color:#06f">0</span>, <span style="color:#06f">3</span>, <span style="color:#093">"Мы"</span>, <span style="color:#093">"изучаем"</span>) <span style="color:#06f;font-style:italic">//["Мы", "изучаем", "JavaScript"]</span>
+
+<span style="font-weight:700">var</span> arr <span style="color:#00f">=</span> [<span style="color:#093">"Я"</span>, <span style="color:#093">"изучаю"</span>, <span style="color:#093">"JavaScript"</span>];
+<span style="color:#06f;font-style:italic">// с позиции 2 удалить 0 и вставить "сложный", "язык"</span>
+arr.<span style="color:#33f;font-weight:700">splice</span>(<span style="color:#06f">2</span>, <span style="color:#06f">0</span>, <span style="color:#093">"сложный"</span>, <span style="color:#093">"язык"</span>); <span style="color:#06f;font-style:italic">//"Я", "изучаю", "сложный", "язык", "JavaScript"</span>
+
+<span style="font-weight:700">var</span> arr <span style="color:#00f">=</span> [<span style="color:#06f">1</span>, <span style="color:#06f">2</span>, <span style="color:#06f">5</span>]
+<span style="color:#06f;font-style:italic">// начиная с позиции индексом -1 (перед последним элементом)</span>
+<span style="color:#06f;font-style:italic">// удалить 0 элементов,</span>
+<span style="color:#06f;font-style:italic">// затем вставить числа 3 и 4</span>
+arr.<span style="color:#33f;font-weight:700">splice</span>(<span style="color:#00f">-</span><span style="color:#06f">1</span>, <span style="color:#06f">0</span>, <span style="color:#06f">3</span>, <span style="color:#06f">4</span>);<span style="color:#06f;font-style:italic">//1,2,3,4,5</span>
+
+<span style="color:#06f;font-style:italic">// ________________________________________________________slice - копирует участок массива от begin до end, не включая end. Исходник не меняется.</span>
+<span style="font-weight:700">var</span> arr <span style="color:#00f">=</span> [<span style="color:#093">"Почему"</span>, <span style="color:#093">"надо"</span>, <span style="color:#093">"учить"</span>, <span style="color:#093">"JavaScript"</span>];
+<span style="color:#06f;font-style:italic">// элементы 1, 2 (не включая 3)</span>
+arr.<span style="color:#33f;font-weight:700">slice</span>(<span style="color:#06f">1</span>, <span style="color:#06f">3</span>); <span style="color:#06f;font-style:italic">// надо, учить</span>
+
+arr.<span style="color:#33f;font-weight:700">slice</span>(<span style="color:#06f">1</span>); <span style="color:#06f;font-style:italic">// взять все элементы, начиная с номера 1</span>
+arr.<span style="color:#33f;font-weight:700">slice</span>(<span style="color:#00f">-</span><span style="color:#06f">2</span>); <span style="color:#06f;font-style:italic">// копировать от 2-го элемента с конца и дальше</span>
+arr.<span style="color:#33f;font-weight:700">slice</span>(); <span style="color:#06f;font-style:italic">//скопируется весь массив</span>
+
+<span style="color:#06f;font-style:italic">// _______________________________________________________reverce - меняет порядок </span>
+<span style="font-weight:700">var</span> arr <span style="color:#00f">=</span> [<span style="color:#06f">1</span>, <span style="color:#06f">2</span>, <span style="color:#06f">3</span>];
+arr.<span style="color:#33f;font-weight:700">reverse</span>();<span style="color:#06f;font-style:italic">// 3,2,1</span>
+
+<span style="color:#06f;font-style:italic">//________________________________________________________concat - создаёт новый массив, в который копируются элементы из arr, а также value1, value2...</span>
+<span style="font-weight:700">var</span> arr <span style="color:#00f">=</span> [<span style="color:#06f">1</span>, <span style="color:#06f">2</span>];
+<span style="font-weight:700">var</span> newArr <span style="color:#00f">=</span> arr.<span style="color:#33f;font-weight:700">concat</span>(<span style="color:#06f">3</span>, <span style="color:#06f">4</span>);<span style="color:#06f;font-style:italic">// 1,2,3,4</span>
+
+<span style="color:#06f;font-style:italic">// _______________________________________________________indexOf / lastIndexOf - возвращает номер элемента </span>
+<span style="font-weight:700">var</span> arr <span style="color:#00f">=</span> [<span style="color:#06f">1</span>, <span style="color:#06f">0</span>, <span style="color:#9700cc">false</span>];
+arr.<span style="color:#33f;font-weight:700">indexOf</span>(<span style="color:#06f">0</span>)  <span style="color:#06f;font-style:italic">// 1</span>
+arr.<span style="color:#33f;font-weight:700">indexOf</span>(<span style="color:#9700cc">false</span>)  <span style="color:#06f;font-style:italic">// 2</span>
+arr.<span style="color:#33f;font-weight:700">indexOf</span>(<span style="color:#9700cc">null</span>)  <span style="color:#06f;font-style:italic">// -1 нету(-1)</span>
+
+<span style="color:#06f;font-style:italic">//________________________________________________________Object.keys(obj) - обьект в массив</span>
+<span style="font-weight:700">var</span> user <span style="color:#00f">=</span> {
+  name: <span style="color:#093">"Петя"</span>,
+  age: <span style="color:#06f">30</span>
+};
+<span style="font-weight:700">var</span> keys <span style="color:#00f">=</span> <span style="color:#33f;font-weight:700">Object</span>.keys(user);
+<span style="color:#33f;font-weight:700">alert</span>( keys ); <span style="color:#06f;font-style:italic">// name, age</span>
+
+<span style="color:#06f;font-style:italic">// _______________________________________________________push/pop, shift/unshift</span>
+arr.<span style="color:#33f;font-weight:700">push</span>();<span style="color:#06f;font-style:italic">//    вставляет последний в переменную</span>
+arr.<span style="color:#33f;font-weight:700">pop</span>();<span style="color:#06f;font-style:italic">//     вырезает последний в переменную</span>
+arr.<span style="color:#33f;font-weight:700">shift</span>();<span style="color:#06f;font-style:italic">//   вырезает первый в переменную</span>
+arr.<span style="color:#33f;font-weight:700">unshift</span>();<span style="color:#06f;font-style:italic">// вставляет первый в переменную</span>
+</pre>
+
+<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="color:#33f;font-weight:700">charAt</span>() <span style="color:#06f;font-style:italic">//- возвращает символ по указанной позиции.</span>
+<span style="color:#33f;font-weight:700">indexOf</span>() <span style="color:#06f;font-style:italic">//- возвращает индекс первого встречающегося в строке указанного символа.</span>
+<span style="color:#33f;font-weight:700">lastIndexOf</span>() <span style="color:#06f;font-style:italic">//- возвращает индекс последнего встречающегося в строке указанного символа.</span>
+<span style="color:#33f;font-weight:700">toLowerCase</span>() <span style="color:#06f;font-style:italic">//- перевод всех символов в нижний регистр, </span>
+<span style="color:#33f;font-weight:700">toUpperCase</span>() <span style="color:#06f;font-style:italic">//- перевод всех символов в верхний регистр.</span>
+<span style="color:#33f;font-weight:700">substring</span>() <span style="color:#06f;font-style:italic">//-  возвращает строку между двумя указанными индексами, не включая индексы.Т.е. вырезает кусок текста с .. По.."</span>
+<span style="color:#33f;font-weight:700">substr</span>() <span style="color:#06f;font-style:italic">//- возвращает строку начиная с указанного индекса, указанной длины.Т.е. вырезает кусок текста с .. длинна..</span>
+</pre>
+
+
+
+
+
+<h4>DOM</h4>
+<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="color:#06f;font-style:italic">//Свойства для навигации по DOM</span>
+childNodes <span style="color:#06f;font-style:italic">//- массив всех дочерних узлов</span>
+firstChild <span style="color:#06f;font-style:italic">//- первый дочерний узел</span>
+lastChild <span style="color:#06f;font-style:italic">//- последний дочерний узел</span>
+nextSibling <span style="color:#06f;font-style:italic">//- следующий узел расположенный на одном уровне с текущим</span>
+previousSibling <span style="color:#06f;font-style:italic">//- предыдущий узел расположенный на одном уровне с текущим</span>
+parentNode <span style="color:#06f;font-style:italic">//- родительский узел для текущего элемента"</span>
+
+
+setAttribute <span style="color:#06f;font-style:italic">// установка атрибута</span>
+removeAttribute;<span style="color:#06f;font-style:italic">// удаление атрибута           </span>
+getAttribute<span style="color:#06f;font-style:italic">// чтение атрибута</span>
+
+createElement<span style="color:#06f;font-style:italic">// создание элемента </span>
+appendChild <span style="color:#06f;font-style:italic">// добавление созданного элемента в конце.</span>
+removeChild <span style="color:#06f;font-style:italic">// удаление выбранного элемента из дерева.</span>
+
+insertBefor(<span style="color:#093">"что вставляем"</span>,<span style="color:#093">"перед чем"</span>)
+replacechild(<span style="color:#093">"что"</span>  <span style="color:#093">"чем"</span>) 
+</pre>
+
+<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="color:#06f;font-style:italic">// Объект Navigator поддерживает пять свойств, по которым можно опередить версию браузера.</span>
+appName <span style="color:#06f;font-style:italic">// - Название веб браузера.</span>
+appVersion <span style="color:#06f;font-style:italic">// - Номер версии или другая информация о браузере</span>
+userAgent <span style="color:#06f;font-style:italic">// - строка, которую браузер посылает в HTTP заголовке USER-AGENT</span>
+appCodeName <span style="color:#00f">-</span><span style="color:#06f;font-style:italic">//  Кодовое имя браузера. Для Netscape используется кодовое имя ""Mozilla"" Для совместимости IE делает то же самое.</span>
+platform <span style="color:#06f;font-style:italic">// - Аппаратная платформа, на которой работает браузер.</span>
+
+<span style="color:#06f;font-style:italic">//window</span>
+<span style="color:#33f;font-weight:700">window</span>.<span style="color:#6782d3">innerWidth</span>; <span style="color:#06f;font-style:italic">// ширина</span>
+<span style="color:#33f;font-weight:700">window</span>.<span style="color:#6782d3">innerHeight</span>; <span style="color:#06f;font-style:italic">// высота</span>
+</pre>
+<pre style="background:rgba(238,238,238,0.92);color:#000">Обработчик    Условия вызова Поддержка
+onabort прерывание загрузки изображения    <span style="color:#00f">&lt;</span>img<span style="color:#00f">></span>
+onblur  Элемент теряет фокус  <span style="color:#00f">&lt;</span>button<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>input<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>label<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>select<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>textarea<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>body<span style="color:#00f">></span>
+onchange    Элемент потерял фокус и его значения с момента получения фокуса изменилось  <span style="color:#00f">&lt;</span>input<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>select<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>textarea<span style="color:#00f">></span>
+onclick Была нажата и отпущена клавиша мыши.  Большинство элементов.
+ondblclick  Двойной щелчок Большинство элементов.
+onerror Ошибка при загрузке изображения <span style="color:#00f">&lt;</span>img<span style="color:#00f">></span>
+onfocus Элемент получил фокус    <span style="color:#00f">&lt;</span>button<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>input<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>label<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>select<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>textarea<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>body<span style="color:#00f">></span>
+onkeydown   Клавиша нажата Элементы формы и <span style="color:#00f">&lt;</span>body<span style="color:#00f">></span>
+onkeypress  Клавиша нажата и  отпущена   Элементы формы и <span style="color:#00f">&lt;</span>body<span style="color:#00f">></span>
+onkeyup Клавиша отпущена Элементы формы и <span style="color:#00f">&lt;</span>body<span style="color:#00f">></span>
+onload  Загрузка завершена <span style="color:#00f">&lt;</span>body<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>frameset<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>img<span style="color:#00f">></span>
+onmousedown Нажата кнопка мыши  Большинство элементов
+onmousemove Перемещение указателя мыши  Большинство элементов
+onmouseout  Указатель мыши выходит за границы элемента Большинство элементов
+onmouseover Указатель мыши находит на элемент  Большинство элементов
+onmouseup   Отпущена клавиша мыши    Большинство элементов
+onreset Запрос на очистку полей формы  <span style="color:#00f">&lt;</span>form<span style="color:#00f">></span>
+onresize    Изменение размера окна  <span style="color:#00f">&lt;</span>body<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>frameset<span style="color:#00f">></span>
+onselect    Выбор текста <span style="color:#00f">&lt;</span>input<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>textarea<span style="color:#00f">></span>
+onsubmit    Запрос на передачу данных формы  <span style="color:#00f">&lt;</span>form<span style="color:#00f">></span>
+onunload    Документ выгружен   <span style="color:#00f">&lt;</span>body<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>frameset<span style="color:#00f">></span>
+
+</pre>
+
+
+
+
+
+
+<h4>RegExp / регулярные выражения</h4>
+<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="color:#06f;font-style:italic">//   \d - метасимвол, заменяющий любой числовой символ</span>
+<span style="color:#06f;font-style:italic">//   \d\d\d - соответствует подстроке из трех чисел.</span>
+<span style="font-weight:700">var</span> pattern1 <span style="color:#00f">=</span><span style="color:#ff0080"> /<span style="color:#6782d3">\d</span><span style="color:#6782d3">\d</span><span style="color:#6782d3">\d</span>/</span>; 
+<span style="font-weight:700">var</span> pattern2 <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="">RegExp</span>(<span style="color:#093">"<span style="color:#6782d3">\d</span><span style="color:#6782d3">\d</span><span style="color:#6782d3">\d</span>"</span>);<span style="color:#093">"   "</span>есть два способа: через литерал и через ФК
+
+<span style="color:#06f;font-style:italic">// search() - возвращает индекс ПЕРВОГО найденного символа подстроки по шаблону или -1 если подстрока не найдена </span>
+<span style="font-weight:700">var</span> text <span style="color:#00f">=</span> <span style="color:#093">""</span>Строка <span style="color:#06f">123</span> для тестирования примера.<span style="color:#093">""</span>;
+<span style="font-weight:700">var</span> pattern <span style="color:#00f">=</span><span style="color:#ff0080"> /<span style="color:#6782d3">\d</span><span style="color:#6782d3">\d</span><span style="color:#6782d3">\d</span>/</span>;
+<span style="font-weight:700">var</span> firstIndex <span style="color:#00f">=</span> text.<span style="color:#33f;font-weight:700">search</span>(pattern);
+<span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>(<span style="color:#093">""</span>Подстрока найдена по индексу <span style="color:#093">""</span> <span style="color:#00f">+</span> firstIndex);<span style="color:#06f;font-style:italic">//7</span>
+
+<span style="color:#06f;font-style:italic">// replace() -  производит операцию поиска с заменой.</span>
+<span style="color:#06f;font-style:italic">// g - глобальный поиск - все вхождения, а не только первое." </span>
+<span style="font-weight:700">var</span> text <span style="color:#00f">=</span> <span style="color:#093">"Строка для 123тести456рования при789мера."</span>;
+<span style="font-weight:700">var</span> pattern <span style="color:#00f">=</span><span style="color:#ff0080"> /<span style="color:#6782d3">\d</span><span style="color:#6782d3">\d</span><span style="color:#6782d3">\d</span>/g</span>; 
+<span style="font-weight:700">var</span> result <span style="color:#00f">=</span> text.<span style="color:#33f;font-weight:700">replace</span>(pattern, <span style="color:#093">""</span>);
+<span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>(result);
+    
+<span style="color:#06f;font-style:italic">// match возвращает массив ['1', '2', '3']  </span>
+<span style="font-weight:700">var</span> text <span style="color:#00f">=</span> <span style="color:#093">"1 плюс 2 равно 3"</span>;
+<span style="font-weight:700">var</span> res <span style="color:#00f">=</span> text.<span style="color:#33f;font-weight:700">match</span>(<span style="color:#ff0080">/<span style="color:#6782d3">\d</span>/g</span>); 
+<span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>(res);
+    
+<span style="color:#06f;font-style:italic">//split - разбивает строку на массив подстрок в соответствии с регулярным выражением.</span>
+<span style="font-weight:700">var</span> text <span style="color:#00f">=</span> <span style="color:#093">"test-А123test-B123test-C111test-D567"</span>;
+<span style="font-weight:700">var</span> res <span style="color:#00f">=</span> text.<span style="color:#33f;font-weight:700">split</span>(<span style="color:#ff0080">/<span style="color:#6782d3">\d</span><span style="color:#6782d3">\d</span><span style="color:#6782d3">\d</span>/g</span>); 
+<span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>(res);<span style="color:#06f;font-style:italic">// возвращает массив ['test-A', 'test-B', 'test-C', 'test-D']Разбито по ""123"""</span>
+
+
+<span style="color:#06f;font-style:italic">// exec -  работает точно так же как и метод match типа данных string.</span>
+<span style="color:#06f;font-style:italic">// Но всегда возвращает только одно значение или null</span>
+<span style="color:#06f;font-style:italic">// При глобальном поиске (флаг g) метод возвращает найденную подстроку и продолжает поиск далее по строке."</span>
+<span style="font-weight:700">var</span> test <span style="color:#00f">=</span> <span style="color:#093">"Строка №2 для тестирования примера с регулярными выражениями в файле 6_RegExMethods_exec.htm"</span>;
+<span style="font-weight:700">var</span> pattern <span style="color:#00f">=</span><span style="color:#ff0080"> /<span style="color:#6782d3">\d</span>/g</span>;
+<span style="font-weight:700">var</span> res;
+<span style="color:#00f">while</span> ((res <span style="color:#00f">=</span> pattern.<span style="color:#33f;font-weight:700">exec</span>(test)) <span style="color:#00f">!</span><span style="color:#00f">=</span> <span style="color:#9700cc">null</span>) {
+    <span style="color:#33f;font-weight:700">alert</span>(<span style="color:#093">"Найдено "</span> <span style="color:#00f">+</span> res <span style="color:#00f">+</span> <span style="color:#093">" в позиции"</span> 
+    <span style="color:#00f">+</span> res.<span style="color:#6782d3">index</span> <span style="color:#00f">+</span> <span style="color:#093">". Следующий поиск начнется с индекса "</span> <span style="color:#00f">+</span> pattern.<span style="color:#6782d3">lastIndex</span>);
+} 
+        
+<span style="color:#06f;font-style:italic">//  test -  возвращает true если метод exec возвращает не null;</span>
+<span style="font-weight:700">var</span> pattern <span style="color:#00f">=</span><span style="color:#ff0080"> /<span style="color:#6782d3">\d</span><span style="color:#6782d3">\d</span><span style="color:#6782d3">\d</span>/</span>;
+<span style="font-weight:700">var</span> input <span style="color:#00f">=</span> <span style="color:#093">"hello world"</span>;
+<span style="color:#00f">if</span> (pattern.<span style="color:#33f;font-weight:700">test</span>(input)) {
+    <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>(<span style="color:#093">"Строка "</span> <span style="color:#00f">+</span> input <span style="color:#00f">+</span> <span style="color:#093">" соответствует шаблону&lt;br />"</span>);
+}
+<span style="color:#00f">else</span> {
+    <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>(<span style="color:#093">"Строка "</span> <span style="color:#00f">+</span> input <span style="color:#00f">+</span> <span style="color:#093">" НЕ соответствует шаблону&lt;br />"</span>);
+}<span style="color:#06f;font-style:italic">// Проверяет, равен ли pattern=input (если да true)</span>
+input <span style="color:#00f">=</span> <span style="color:#093">"123"</span>;
+<span style="color:#00f">if</span> (pattern.<span style="color:#33f;font-weight:700">test</span>(input)) {
+    <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>(<span style="color:#093">"Строка "</span> <span style="color:#00f">+</span> input <span style="color:#00f">+</span> <span style="color:#093">" соответствует шаблону&lt;br />"</span>);
+}
+<span style="color:#00f">else</span> {
+    <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>(<span style="color:#093">"Строка "</span> <span style="color:#00f">+</span> input <span style="color:#00f">+</span> <span style="color:#093">" НЕ соответствует шаблону&lt;br />"</span>);
+}<span style="color:#06f;font-style:italic">// Проверяет, равен ли pattern=input (если да true)</span>
+</pre>
+
+<pre style="background:rgba(238,238,238,0.92);color:#000">МЕТАДАННЫЕ RegExp
+\w  Любой алфавитно<span style="color:#00f">-</span>цифровой символ в верхнем и нижнем регистре и символ подчеркивания(тоже самое, что и [a<span style="color:#00f">-</span>zA<span style="color:#00f">-</span>Z0<span style="color:#00f">-</span>9_]). 
+\W  Любой символ не являющийся подчеркиванием и не относящийся к алфавитно<span style="color:#00f">-</span>цифровым      
+\s  любой пробельный символ (тоже самое, что [\r\n\f\v\t])         
+\S  Любой не пробельный символ (тоже самое, что [^\r\n\f\v\t])        
+\d  любая цифра (digit)             
+\D  любой не цифровой символ (тоже самое, что [^<span style="color:#06f">0</span><span style="color:#00f">-</span><span style="color:#06f">9</span>])        
+                   
+\v  (вертикальная табуляция)              
+\t  (табуляция)               
+\r  (перевод каретки)              
+\n  (перевод строки)              
+\f  (перевод страницы)              
+                   
+Наборы    символов               
+[RrGgBb]    <span style="color:#00f">-</span> Соответствие указанным символам            
+[a<span style="color:#00f">-</span>z]   Соответствие символам английского алфавита в нижнем регистре         
+[<span style="color:#06f">0</span><span style="color:#00f">-</span><span style="color:#06f">9</span>]   Соответствие указанным цифрам             
+[^<span style="color:#06f">0</span><span style="color:#00f">-</span><span style="color:#06f">9</span>]  Соответствие с чем угодно кроме цифр заданного диапазона        
+                   
+Квантификатор  (Кванторы)               
+<span style="color:#00f">+</span>   Один или несколько символов            
+<span style="color:#00f">*</span>   ноль и более символов            
+?   ноль или одно вхождение            
+                   
+Интервалы                 
+{<span style="color:#06f">3</span>} точное количество совпадений             
+{<span style="color:#06f">2</span>,<span style="color:#06f">3</span>}   диапазон               
+{<span style="color:#06f">3</span>,}    не менее              
+{,<span style="color:#06f">3</span>}    не более    
+</pre>
+
 <h4>ООП, this, конструктор, прототипы</h4>
 <p class="lead">
 <pre style="background:rgba(238,238,238,0.92);color:#000"><span style="font-weight:700">function</span> <span style="color:#ff8000">MAN</span>(name){
@@ -347,56 +671,6 @@ v<span style="color:#33f;font-weight:700">.log</span>(serialObj)
 v<span style="color:#33f;font-weight:700">.log</span>(returnObj)
 </pre>
 </p>
-
-<h4>Типы, сравнения</h4>
-<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="color:#06f;font-style:italic">//hasOwnProperty - возращает true, если обьект rect1 имеет свойство wight Только свойства, без прототипов</span>
-<span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>(rect1.hasOwnProperty(<span style="color:#093">"wight"</span>))
-<span style="color:#06f;font-style:italic">//А что бы узнать имеется ли значение и в свойствах и в прототипе можно использовать in                                   </span>
-<span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>( (<span style="color:#093">""</span>getArea<span style="color:#093">""</span> <span style="color:#00f">in</span> rect1) <span style="color:#00f">+</span> <span style="color:#093">""</span><span style="color:#00f">&lt;</span>br/<span style="color:#00f">></span><span style="color:#093">""</span>)                     
-
-<span style="color:#06f;font-style:italic">//"equals - специальный прописаный вручную в прототипе метод для сравнения двух обьектов</span>
-<span style="color:#06f;font-style:italic">//Равен ли один обьект другому: false / true"                       </span>
-<span style="color:#33f;font-weight:700">Rectangle</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">equals</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span> (otherObj) {
-    <span style="color:#00f">if</span> (this.<span style="color:#6782d3">width</span> <span style="color:#00f">===</span> otherObj.<span style="color:#6782d3">width</span> <span style="color:#00f">&amp;</span><span style="color:#00f">&amp;</span> this.<span style="color:#6782d3">height</span> <span style="color:#00f">===</span> otherObj.<span style="color:#6782d3">height</span>) {
-        <span style="color:#00f">return</span> <span style="color:#9700cc">true</span>;
-    }
-    <span style="color:#00f">return</span> <span style="color:#9700cc">false</span>;
-rect1.equals(rect2) <span style="color:#06f;font-style:italic">//false</span>
-
-<span style="color:#06f;font-style:italic">//compareTo - специальный прописаный вручную в прототипе метод для сравнения двух обьектов</span>
-<span style="color:#06f;font-style:italic">//Какой обьект больше, какой меньше или равен: 1 / -1 / 0                       </span>
-<span style="color:#33f;font-weight:700">Rectangle</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">compareTo</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span> (otherObject) {
-<span style="color:#00f">if</span> (this.getArea() <span style="color:#00f">></span> otherObject.getArea()) {
-    <span style="color:#00f">return</span> <span style="color:#06f">1</span>;
-}
-<span style="color:#00f">else</span> <span style="color:#00f">if</span> (this.getArea() <span style="color:#00f">&lt;</span> otherObject.getArea()) {
-    <span style="color:#00f">return</span> <span style="color:#00f">-</span><span style="color:#06f">1</span>;
-}
-<span style="color:#00f">else</span> {
-    <span style="color:#00f">return</span> <span style="color:#06f">0</span>;
-}   
-rect1.compareTo(rect2)  <span style="color:#06f;font-style:italic">//false   -1</span>
-
-<span style="color:#06f;font-style:italic">// instanceof - оператор для проверки типа объекта</span>
-<span style="font-weight:700">var</span> x <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="">Array</span>(<span style="color:#06f">10</span>);
-<span style="color:#00f">if</span> (x <span style="color:#00f">instanceof</span> <span style="color:#33f;font-weight:700">Array</span>) { <span style="color:#06f;font-style:italic">// аналог оператора is в C#</span>
-    <span style="color:#33f;font-weight:700">alert</span>(<span style="color:#093">""</span>x is array<span style="color:#093">""</span>);
-}<span style="color:#06f;font-style:italic">//x is array</span>
-
-<span style="color:#06f;font-style:italic">// typeof - оператор для получения типа объекта в виде строкового значения</span>
-<span style="font-weight:700">var</span> test <span style="color:#00f">=</span> <span style="color:#093">""</span>hello<span style="color:#093">""</span>; <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>( <span style="color:#00f">typeof</span> test);<span style="color:#06f;font-style:italic">//string</span>
-<span style="font-weight:700">var</span> test2 <span style="color:#00f">=</span> <span style="color:#06f">123</span>; <span style="color:#33f;font-weight:700">document</span>.write (<span style="color:#00f">typeof</span> test2);<span style="color:#06f;font-style:italic">//number</span>
-<span style="font-weight:700">var</span> test3 <span style="color:#00f">=</span> <span style="color:#9700cc">true</span>; <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>( <span style="color:#00f">typeof</span> test3);<span style="color:#06f;font-style:italic">//boolean</span>
-<span style="font-weight:700">var</span> test4 <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="">Array</span>(); <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>( <span style="color:#00f">typeof</span> test4);<span style="color:#06f;font-style:italic">//object       </span>
-<span style="font-weight:700">var</span> test5 <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="">Date</span>(); <span style="color:#33f;font-weight:700">document</span>.write (<span style="color:#00f">typeof</span> test5);<span style="color:#06f;font-style:italic">//object</span>
-<span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>(<span style="color:#00f">typeof</span> test6.toString); <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>(<span style="color:#00f">typeof</span> test6);<span style="color:#06f;font-style:italic">//</span>
-</pre>
-
-
-
-
-
-
 <h4>Module / МОДУЛИ</h4>
 <p class="lead">
 <pre style="background:rgba(238,238,238,0.92);color:#000">(<span style="font-weight:700">function</span>(){    
@@ -416,280 +690,6 @@ rect1.compareTo(rect2)  <span style="color:#06f;font-style:italic">//false   -1<
 m.sum(<span style="color:#06f">5</span>,<span style="color:#06f">7</span>); <span style="color:#06f;font-style:italic">//12</span>
 </pre>
 </p>
-
-<h4>Операторы</h4>
-<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="color:#9700cc">true</span>  <span style="color:#00f">&amp;</span><span style="color:#00f">&amp;</span> <span style="color:#9700cc">true</span> <span style="color:#00f">=</span> <span style="color:#9700cc">true</span>
-<span style="color:#9700cc">false</span> <span style="color:#00f">&amp;</span><span style="color:#00f">&amp;</span> <span style="color:#9700cc">true</span> <span style="color:#00f">=</span> <span style="color:#9700cc">false</span>
-<span style="color:#9700cc">true</span>  <span style="color:#00f">&amp;</span><span style="color:#00f">&amp;</span> <span style="color:#9700cc">false</span> <span style="color:#00f">=</span> <span style="color:#9700cc">false</span>
-<span style="color:#9700cc">false</span> <span style="color:#00f">&amp;</span><span style="color:#00f">&amp;</span> <span style="color:#9700cc">false</span> <span style="color:#00f">=</span> <span style="color:#9700cc">false</span>
-_______________________
-<span style="color:#9700cc">true</span>  <span style="color:#00f">||</span> <span style="color:#9700cc">true</span> <span style="color:#00f">=</span> <span style="color:#9700cc">true</span>
-<span style="color:#9700cc">false</span> <span style="color:#00f">||</span> <span style="color:#9700cc">true</span> <span style="color:#00f">=</span> <span style="color:#9700cc">true</span>
-<span style="color:#9700cc">true</span>  <span style="color:#00f">||</span> <span style="color:#9700cc">false</span> <span style="color:#00f">=</span> <span style="color:#9700cc">true</span>
-<span style="color:#9700cc">false</span> <span style="color:#00f">||</span> <span style="color:#9700cc">false</span> <span style="color:#00f">=</span> <span style="color:#9700cc">false</span>
-</pre>
-<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="font-weight:700">var</span> a <span style="color:#00f">=</span> <span style="color:#33f;font-weight:700">prompt</span>(<span style="color:#093">"День недели"</span>, a)
-<span style="color:#00f">switch</span> (a){
-    <span style="color:#00f">case</span> <span style="color:#093">"1"</span>:
-    <span style="color:#00f">case</span> <span style="color:#093">"2"</span>:
-    <span style="color:#00f">case</span> <span style="color:#093">"3"</span>:
-    <span style="color:#00f">case</span> <span style="color:#093">"4"</span>:
-    <span style="color:#00f">case</span> <span style="color:#093">"5"</span>:
-    <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>(<span style="color:#093">"Это, сцуко, рабочий день((("</span>);
-    <span style="color:#00f">break</span>;
-    <span style="color:#00f">case</span> <span style="color:#093">"6"</span>:
-    <span style="color:#00f">case</span> <span style="color:#093">"7"</span>:
-    <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>(<span style="color:#093">"Ураа, выходной!"</span>);
-    <span style="color:#00f">break</span>;
-}
-</pre>
-
-<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="color:#06f;font-style:italic">// тернарный оператор</span>
-( условие ? Если условие ИСТИННО : Если условие ЛОЖНО )
-cost <span style="color:#00f">=</span> quantity <span style="color:#00f">>=</span> <span style="color:#06f">10</span> ? quantity <span style="color:#00f">*</span> price <span style="color:#00f">*</span> discount : quantity <span style="color:#00f">*</span> price;
-</pre>
-
-<h4>Массивы</h4>
-<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="color:#06f;font-style:italic">//________________________________________________________ split - строку в массив </span>
-<span style="font-weight:700">var</span> names <span style="color:#00f">=</span> <span style="color:#093">'Маша, Петя, Марина, Василий'</span>;
-<span style="font-weight:700">var</span> arr <span style="color:#00f">=</span> names.<span style="color:#33f;font-weight:700">split</span>(<span style="color:#093">', '</span>); <span style="color:#06f;font-style:italic">// ["Маша", "Петя", "Марина", "Василий"]</span>
-<span style="color:#093">"a,b,c,d"</span>.<span style="color:#33f;font-weight:700">split</span>(<span style="color:#093">','</span>, <span style="color:#06f">2</span>); <span style="color:#06f;font-style:italic">// a,b - второй аргумен это число значений, остальные отбрасываются</span>
-<span style="color:#093">"тест"</span>.str.<span style="color:#33f;font-weight:700">split</span>(<span style="color:#093">''</span>) ); <span style="color:#06f;font-style:italic">// т,е,с,т - пустой, разбивает по буквам</span>
-
-<span style="color:#06f;font-style:italic">// _________________________________________________________join -  массив в строку    </span>
-<span style="font-weight:700">var</span> arr <span style="color:#00f">=</span> [<span style="color:#093">'Маша'</span>, <span style="color:#093">'Петя'</span>, <span style="color:#093">'Марина'</span>, <span style="color:#093">'Василий'</span>];
-<span style="font-weight:700">var</span> str <span style="color:#00f">=</span> arr.<span style="color:#33f;font-weight:700">join</span>(<span style="color:#093">';'</span>);<span style="color:#06f;font-style:italic">// Маша;Петя;Марина;Василий </span>
-<span style="color:#00f">new</span> <span style="">Array</span>(<span style="color:#06f">4</span>).<span style="color:#33f;font-weight:700">join</span>(<span style="color:#093">"ля"</span>); <span style="color:#06f;font-style:italic">// ляляля</span>
-
-<span style="color:#06f;font-style:italic">// _________________________________________________________delete  - удаление</span>
-<span style="font-weight:700">var</span> arr <span style="color:#00f">=</span> [<span style="color:#093">"Я"</span>, <span style="color:#093">"иду"</span>, <span style="color:#093">"домой"</span>];
-<span style="color:#00f">delete</span> arr[<span style="color:#06f">1</span>]; <span style="color:#06f;font-style:italic">// ["Я", undefined, "домой"];</span>
-
-<span style="color:#06f;font-style:italic">//_________________________________________________________splice - удаление, вставка</span>
-<span style="font-weight:700">var</span> arr <span style="color:#00f">=</span> [<span style="color:#093">"Я"</span>, <span style="color:#093">"изучаю"</span>, <span style="color:#093">"JavaScript"</span>];
-<span style="color:#06f;font-style:italic">// начиная с позиции 1, удалить 1 элемент</span>
-arr.<span style="color:#33f;font-weight:700">splice</span>(<span style="color:#06f">1</span>, <span style="color:#06f">1</span>); <span style="color:#06f;font-style:italic">//["Я", "JavaScript"]</span>
-
-<span style="font-weight:700">var</span> arr <span style="color:#00f">=</span> [<span style="color:#093">"Я"</span>, <span style="color:#093">"сейчас"</span>, <span style="color:#093">"изучаю"</span>, <span style="color:#093">"JavaScript"</span>];
-<span style="color:#06f;font-style:italic">// удалить 3 первых элемента и добавить другие вместо них</span>
-arr.<span style="color:#33f;font-weight:700">splice</span>(<span style="color:#06f">0</span>, <span style="color:#06f">3</span>, <span style="color:#093">"Мы"</span>, <span style="color:#093">"изучаем"</span>) <span style="color:#06f;font-style:italic">//["Мы", "изучаем", "JavaScript"]</span>
-
-<span style="font-weight:700">var</span> arr <span style="color:#00f">=</span> [<span style="color:#093">"Я"</span>, <span style="color:#093">"изучаю"</span>, <span style="color:#093">"JavaScript"</span>];
-<span style="color:#06f;font-style:italic">// с позиции 2 удалить 0 и вставить "сложный", "язык"</span>
-arr.<span style="color:#33f;font-weight:700">splice</span>(<span style="color:#06f">2</span>, <span style="color:#06f">0</span>, <span style="color:#093">"сложный"</span>, <span style="color:#093">"язык"</span>); <span style="color:#06f;font-style:italic">//"Я", "изучаю", "сложный", "язык", "JavaScript"</span>
-
-<span style="font-weight:700">var</span> arr <span style="color:#00f">=</span> [<span style="color:#06f">1</span>, <span style="color:#06f">2</span>, <span style="color:#06f">5</span>]
-<span style="color:#06f;font-style:italic">// начиная с позиции индексом -1 (перед последним элементом)</span>
-<span style="color:#06f;font-style:italic">// удалить 0 элементов,</span>
-<span style="color:#06f;font-style:italic">// затем вставить числа 3 и 4</span>
-arr.<span style="color:#33f;font-weight:700">splice</span>(<span style="color:#00f">-</span><span style="color:#06f">1</span>, <span style="color:#06f">0</span>, <span style="color:#06f">3</span>, <span style="color:#06f">4</span>);<span style="color:#06f;font-style:italic">//1,2,3,4,5</span>
-
-<span style="color:#06f;font-style:italic">// ________________________________________________________slice - копирует участок массива от begin до end, не включая end. Исходник не меняется.</span>
-<span style="font-weight:700">var</span> arr <span style="color:#00f">=</span> [<span style="color:#093">"Почему"</span>, <span style="color:#093">"надо"</span>, <span style="color:#093">"учить"</span>, <span style="color:#093">"JavaScript"</span>];
-<span style="color:#06f;font-style:italic">// элементы 1, 2 (не включая 3)</span>
-arr.<span style="color:#33f;font-weight:700">slice</span>(<span style="color:#06f">1</span>, <span style="color:#06f">3</span>); <span style="color:#06f;font-style:italic">// надо, учить</span>
-
-arr.<span style="color:#33f;font-weight:700">slice</span>(<span style="color:#06f">1</span>); <span style="color:#06f;font-style:italic">// взять все элементы, начиная с номера 1</span>
-arr.<span style="color:#33f;font-weight:700">slice</span>(<span style="color:#00f">-</span><span style="color:#06f">2</span>); <span style="color:#06f;font-style:italic">// копировать от 2-го элемента с конца и дальше</span>
-arr.<span style="color:#33f;font-weight:700">slice</span>(); <span style="color:#06f;font-style:italic">//скопируется весь массив</span>
-
-<span style="color:#06f;font-style:italic">// _______________________________________________________reverce - меняет порядок </span>
-<span style="font-weight:700">var</span> arr <span style="color:#00f">=</span> [<span style="color:#06f">1</span>, <span style="color:#06f">2</span>, <span style="color:#06f">3</span>];
-arr.<span style="color:#33f;font-weight:700">reverse</span>();<span style="color:#06f;font-style:italic">// 3,2,1</span>
-
-<span style="color:#06f;font-style:italic">//________________________________________________________concat - создаёт новый массив, в который копируются элементы из arr, а также value1, value2...</span>
-<span style="font-weight:700">var</span> arr <span style="color:#00f">=</span> [<span style="color:#06f">1</span>, <span style="color:#06f">2</span>];
-<span style="font-weight:700">var</span> newArr <span style="color:#00f">=</span> arr.<span style="color:#33f;font-weight:700">concat</span>(<span style="color:#06f">3</span>, <span style="color:#06f">4</span>);<span style="color:#06f;font-style:italic">// 1,2,3,4</span>
-
-<span style="color:#06f;font-style:italic">// _______________________________________________________indexOf / lastIndexOf - возвращает номер элемента </span>
-<span style="font-weight:700">var</span> arr <span style="color:#00f">=</span> [<span style="color:#06f">1</span>, <span style="color:#06f">0</span>, <span style="color:#9700cc">false</span>];
-arr.<span style="color:#33f;font-weight:700">indexOf</span>(<span style="color:#06f">0</span>)  <span style="color:#06f;font-style:italic">// 1</span>
-arr.<span style="color:#33f;font-weight:700">indexOf</span>(<span style="color:#9700cc">false</span>)  <span style="color:#06f;font-style:italic">// 2</span>
-arr.<span style="color:#33f;font-weight:700">indexOf</span>(<span style="color:#9700cc">null</span>)  <span style="color:#06f;font-style:italic">// -1 нету(-1)</span>
-
-<span style="color:#06f;font-style:italic">//________________________________________________________Object.keys(obj) - обьект в массив</span>
-<span style="font-weight:700">var</span> user <span style="color:#00f">=</span> {
-  name: <span style="color:#093">"Петя"</span>,
-  age: <span style="color:#06f">30</span>
-};
-<span style="font-weight:700">var</span> keys <span style="color:#00f">=</span> <span style="color:#33f;font-weight:700">Object</span>.keys(user);
-<span style="color:#33f;font-weight:700">alert</span>( keys ); <span style="color:#06f;font-style:italic">// name, age</span>
-
-<span style="color:#06f;font-style:italic">// _______________________________________________________push/pop, shift/unshift</span>
-arr.<span style="color:#33f;font-weight:700">push</span>();<span style="color:#06f;font-style:italic">//    вставляет последний в переменную</span>
-arr.<span style="color:#33f;font-weight:700">pop</span>();<span style="color:#06f;font-style:italic">//     вырезает последний в переменную</span>
-arr.<span style="color:#33f;font-weight:700">shift</span>();<span style="color:#06f;font-style:italic">//   вырезает первый в переменную</span>
-arr.<span style="color:#33f;font-weight:700">unshift</span>();<span style="color:#06f;font-style:italic">// вставляет первый в переменную</span>
-</pre>
-
-<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="color:#33f;font-weight:700">charAt</span>() <span style="color:#06f;font-style:italic">//- возвращает символ по указанной позиции.</span>
-<span style="color:#33f;font-weight:700">indexOf</span>() <span style="color:#06f;font-style:italic">//- возвращает индекс первого встречающегося в строке указанного символа.</span>
-<span style="color:#33f;font-weight:700">lastIndexOf</span>() <span style="color:#06f;font-style:italic">//- возвращает индекс последнего встречающегося в строке указанного символа.</span>
-<span style="color:#33f;font-weight:700">toLowerCase</span>() <span style="color:#06f;font-style:italic">//- перевод всех символов в нижний регистр, </span>
-<span style="color:#33f;font-weight:700">toUpperCase</span>() <span style="color:#06f;font-style:italic">//- перевод всех символов в верхний регистр.</span>
-<span style="color:#33f;font-weight:700">substring</span>() <span style="color:#06f;font-style:italic">//-  возвращает строку между двумя указанными индексами, не включая индексы.Т.е. вырезает кусок текста с .. По.."</span>
-<span style="color:#33f;font-weight:700">substr</span>() <span style="color:#06f;font-style:italic">//- возвращает строку начиная с указанного индекса, указанной длины.Т.е. вырезает кусок текста с .. длинна..</span>
-</pre>
-
-
-
-
-
-<h4>DOM</h4>
-<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="color:#06f;font-style:italic">//Свойства для навигации по DOM</span>
-childNodes <span style="color:#06f;font-style:italic">//- массив всех дочерних узлов</span>
-firstChild <span style="color:#06f;font-style:italic">//- первый дочерний узел</span>
-lastChild <span style="color:#06f;font-style:italic">//- последний дочерний узел</span>
-nextSibling <span style="color:#06f;font-style:italic">//- следующий узел расположенный на одном уровне с текущим</span>
-previousSibling <span style="color:#06f;font-style:italic">//- предыдущий узел расположенный на одном уровне с текущим</span>
-parentNode <span style="color:#06f;font-style:italic">//- родительский узел для текущего элемента"</span>
-
-
-setAttribute <span style="color:#06f;font-style:italic">// установка атрибута</span>
-removeAttribute;<span style="color:#06f;font-style:italic">// удаление атрибута           </span>
-getAttribute<span style="color:#06f;font-style:italic">// чтение атрибута</span>
-
-createElement<span style="color:#06f;font-style:italic">// создание элемента </span>
-appendChild <span style="color:#06f;font-style:italic">// добавление созданного элемента в конце.</span>
-removeChild <span style="color:#06f;font-style:italic">// удаление выбранного элемента из дерева.</span>
-
-insertBefor(<span style="color:#093">"что вставляем"</span>,<span style="color:#093">"перед чем"</span>)
-replacechild(<span style="color:#093">"что"</span>  <span style="color:#093">"чем"</span>) 
-</pre>
-
-<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="color:#06f;font-style:italic">// Объект Navigator поддерживает пять свойств, по которым можно опередить версию браузера.</span>
-appName <span style="color:#06f;font-style:italic">// - Название веб браузера.</span>
-appVersion <span style="color:#06f;font-style:italic">// - Номер версии или другая информация о браузере</span>
-userAgent <span style="color:#06f;font-style:italic">// - строка, которую браузер посылает в HTTP заголовке USER-AGENT</span>
-appCodeName <span style="color:#00f">-</span><span style="color:#06f;font-style:italic">//  Кодовое имя браузера. Для Netscape используется кодовое имя ""Mozilla"" Для совместимости IE делает то же самое.</span>
-platform <span style="color:#06f;font-style:italic">// - Аппаратная платформа, на которой работает браузер.</span>
-
-<span style="color:#06f;font-style:italic">//window</span>
-<span style="color:#33f;font-weight:700">window</span>.<span style="color:#6782d3">innerWidth</span>; <span style="color:#06f;font-style:italic">// ширина</span>
-<span style="color:#33f;font-weight:700">window</span>.<span style="color:#6782d3">innerHeight</span>; <span style="color:#06f;font-style:italic">// высота</span>
-</pre>
-<pre style="background:rgba(238,238,238,0.92);color:#000">Обработчик    Условия вызова Поддержка
-onabort прерывание загрузки изображения    <span style="color:#00f">&lt;</span>img<span style="color:#00f">></span>
-onblur  Элемент теряет фокус  <span style="color:#00f">&lt;</span>button<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>input<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>label<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>select<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>textarea<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>body<span style="color:#00f">></span>
-onchange    Элемент потерял фокус и его значения с момента получения фокуса изменилось  <span style="color:#00f">&lt;</span>input<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>select<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>textarea<span style="color:#00f">></span>
-onclick Была нажата и отпущена клавиша мыши.  Большинство элементов.
-ondblclick  Двойной щелчок Большинство элементов.
-onerror Ошибка при загрузке изображения <span style="color:#00f">&lt;</span>img<span style="color:#00f">></span>
-onfocus Элемент получил фокус    <span style="color:#00f">&lt;</span>button<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>input<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>label<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>select<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>textarea<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>body<span style="color:#00f">></span>
-onkeydown   Клавиша нажата Элементы формы и <span style="color:#00f">&lt;</span>body<span style="color:#00f">></span>
-onkeypress  Клавиша нажата и  отпущена   Элементы формы и <span style="color:#00f">&lt;</span>body<span style="color:#00f">></span>
-onkeyup Клавиша отпущена Элементы формы и <span style="color:#00f">&lt;</span>body<span style="color:#00f">></span>
-onload  Загрузка завершена <span style="color:#00f">&lt;</span>body<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>frameset<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>img<span style="color:#00f">></span>
-onmousedown Нажата кнопка мыши  Большинство элементов
-onmousemove Перемещение указателя мыши  Большинство элементов
-onmouseout  Указатель мыши выходит за границы элемента Большинство элементов
-onmouseover Указатель мыши находит на элемент  Большинство элементов
-onmouseup   Отпущена клавиша мыши    Большинство элементов
-onreset Запрос на очистку полей формы  <span style="color:#00f">&lt;</span>form<span style="color:#00f">></span>
-onresize    Изменение размера окна  <span style="color:#00f">&lt;</span>body<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>frameset<span style="color:#00f">></span>
-onselect    Выбор текста <span style="color:#00f">&lt;</span>input<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>textarea<span style="color:#00f">></span>
-onsubmit    Запрос на передачу данных формы  <span style="color:#00f">&lt;</span>form<span style="color:#00f">></span>
-onunload    Документ выгружен   <span style="color:#00f">&lt;</span>body<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>frameset<span style="color:#00f">></span>
-
-</pre>
-
-
-
-
-
-
-<h4>RegExp / регулярные выражения</h4>
-<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="color:#06f;font-style:italic">//   \d - метасимвол, заменяющий любой числовой символ</span>
-<span style="color:#06f;font-style:italic">//   \d\d\d - соответствует подстроке из трех чисел.</span>
-<span style="font-weight:700">var</span> pattern1 <span style="color:#00f">=</span><span style="color:#ff0080"> /<span style="color:#6782d3">\d</span><span style="color:#6782d3">\d</span><span style="color:#6782d3">\d</span>/</span>; 
-<span style="font-weight:700">var</span> pattern2 <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="">RegExp</span>(<span style="color:#093">"<span style="color:#6782d3">\d</span><span style="color:#6782d3">\d</span><span style="color:#6782d3">\d</span>"</span>);<span style="color:#093">"   "</span>есть два способа: через литерал и через ФК
-
-<span style="color:#06f;font-style:italic">// search() - возвращает индекс ПЕРВОГО найденного символа подстроки по шаблону или -1 если подстрока не найдена </span>
-<span style="font-weight:700">var</span> text <span style="color:#00f">=</span> <span style="color:#093">""</span>Строка <span style="color:#06f">123</span> для тестирования примера.<span style="color:#093">""</span>;
-<span style="font-weight:700">var</span> pattern <span style="color:#00f">=</span><span style="color:#ff0080"> /<span style="color:#6782d3">\d</span><span style="color:#6782d3">\d</span><span style="color:#6782d3">\d</span>/</span>;
-<span style="font-weight:700">var</span> firstIndex <span style="color:#00f">=</span> text.<span style="color:#33f;font-weight:700">search</span>(pattern);
-<span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>(<span style="color:#093">""</span>Подстрока найдена по индексу <span style="color:#093">""</span> <span style="color:#00f">+</span> firstIndex);<span style="color:#06f;font-style:italic">//7</span>
-
-<span style="color:#06f;font-style:italic">// replace() -  производит операцию поиска с заменой.</span>
-<span style="color:#06f;font-style:italic">// g - глобальный поиск - все вхождения, а не только первое." </span>
-<span style="font-weight:700">var</span> text <span style="color:#00f">=</span> <span style="color:#093">"Строка для 123тести456рования при789мера."</span>;
-<span style="font-weight:700">var</span> pattern <span style="color:#00f">=</span><span style="color:#ff0080"> /<span style="color:#6782d3">\d</span><span style="color:#6782d3">\d</span><span style="color:#6782d3">\d</span>/g</span>; 
-<span style="font-weight:700">var</span> result <span style="color:#00f">=</span> text.<span style="color:#33f;font-weight:700">replace</span>(pattern, <span style="color:#093">""</span>);
-<span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>(result);
-    
-<span style="color:#06f;font-style:italic">// match возвращает массив ['1', '2', '3']  </span>
-<span style="font-weight:700">var</span> text <span style="color:#00f">=</span> <span style="color:#093">"1 плюс 2 равно 3"</span>;
-<span style="font-weight:700">var</span> res <span style="color:#00f">=</span> text.<span style="color:#33f;font-weight:700">match</span>(<span style="color:#ff0080">/<span style="color:#6782d3">\d</span>/g</span>); 
-<span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>(res);
-    
-<span style="color:#06f;font-style:italic">//split - разбивает строку на массив подстрок в соответствии с регулярным выражением.</span>
-<span style="font-weight:700">var</span> text <span style="color:#00f">=</span> <span style="color:#093">"test-А123test-B123test-C111test-D567"</span>;
-<span style="font-weight:700">var</span> res <span style="color:#00f">=</span> text.<span style="color:#33f;font-weight:700">split</span>(<span style="color:#ff0080">/<span style="color:#6782d3">\d</span><span style="color:#6782d3">\d</span><span style="color:#6782d3">\d</span>/g</span>); 
-<span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>(res);<span style="color:#06f;font-style:italic">// возвращает массив ['test-A', 'test-B', 'test-C', 'test-D']Разбито по ""123"""</span>
-
-
-<span style="color:#06f;font-style:italic">// exec -  работает точно так же как и метод match типа данных string.</span>
-<span style="color:#06f;font-style:italic">// Но всегда возвращает только одно значение или null</span>
-<span style="color:#06f;font-style:italic">// При глобальном поиске (флаг g) метод возвращает найденную подстроку и продолжает поиск далее по строке."</span>
-<span style="font-weight:700">var</span> test <span style="color:#00f">=</span> <span style="color:#093">"Строка №2 для тестирования примера с регулярными выражениями в файле 6_RegExMethods_exec.htm"</span>;
-<span style="font-weight:700">var</span> pattern <span style="color:#00f">=</span><span style="color:#ff0080"> /<span style="color:#6782d3">\d</span>/g</span>;
-<span style="font-weight:700">var</span> res;
-<span style="color:#00f">while</span> ((res <span style="color:#00f">=</span> pattern.<span style="color:#33f;font-weight:700">exec</span>(test)) <span style="color:#00f">!</span><span style="color:#00f">=</span> <span style="color:#9700cc">null</span>) {
-    <span style="color:#33f;font-weight:700">alert</span>(<span style="color:#093">"Найдено "</span> <span style="color:#00f">+</span> res <span style="color:#00f">+</span> <span style="color:#093">" в позиции"</span> 
-    <span style="color:#00f">+</span> res.<span style="color:#6782d3">index</span> <span style="color:#00f">+</span> <span style="color:#093">". Следующий поиск начнется с индекса "</span> <span style="color:#00f">+</span> pattern.<span style="color:#6782d3">lastIndex</span>);
-} 
-        
-<span style="color:#06f;font-style:italic">//  test -  возвращает true если метод exec возвращает не null;</span>
-<span style="font-weight:700">var</span> pattern <span style="color:#00f">=</span><span style="color:#ff0080"> /<span style="color:#6782d3">\d</span><span style="color:#6782d3">\d</span><span style="color:#6782d3">\d</span>/</span>;
-<span style="font-weight:700">var</span> input <span style="color:#00f">=</span> <span style="color:#093">"hello world"</span>;
-<span style="color:#00f">if</span> (pattern.<span style="color:#33f;font-weight:700">test</span>(input)) {
-    <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>(<span style="color:#093">"Строка "</span> <span style="color:#00f">+</span> input <span style="color:#00f">+</span> <span style="color:#093">" соответствует шаблону&lt;br />"</span>);
-}
-<span style="color:#00f">else</span> {
-    <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>(<span style="color:#093">"Строка "</span> <span style="color:#00f">+</span> input <span style="color:#00f">+</span> <span style="color:#093">" НЕ соответствует шаблону&lt;br />"</span>);
-}<span style="color:#06f;font-style:italic">// Проверяет, равен ли pattern=input (если да true)</span>
-input <span style="color:#00f">=</span> <span style="color:#093">"123"</span>;
-<span style="color:#00f">if</span> (pattern.<span style="color:#33f;font-weight:700">test</span>(input)) {
-    <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>(<span style="color:#093">"Строка "</span> <span style="color:#00f">+</span> input <span style="color:#00f">+</span> <span style="color:#093">" соответствует шаблону&lt;br />"</span>);
-}
-<span style="color:#00f">else</span> {
-    <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>(<span style="color:#093">"Строка "</span> <span style="color:#00f">+</span> input <span style="color:#00f">+</span> <span style="color:#093">" НЕ соответствует шаблону&lt;br />"</span>);
-}<span style="color:#06f;font-style:italic">// Проверяет, равен ли pattern=input (если да true)</span>
-</pre>
-
-<pre style="background:rgba(238,238,238,0.92);color:#000">МЕТАДАННЫЕ RegExp
-\w  Любой алфавитно<span style="color:#00f">-</span>цифровой символ в верхнем и нижнем регистре и символ подчеркивания(тоже самое, что и [a<span style="color:#00f">-</span>zA<span style="color:#00f">-</span>Z0<span style="color:#00f">-</span>9_]). 
-\W  Любой символ не являющийся подчеркиванием и не относящийся к алфавитно<span style="color:#00f">-</span>цифровым      
-\s  любой пробельный символ (тоже самое, что [\r\n\f\v\t])         
-\S  Любой не пробельный символ (тоже самое, что [^\r\n\f\v\t])        
-\d  любая цифра (digit)             
-\D  любой не цифровой символ (тоже самое, что [^<span style="color:#06f">0</span><span style="color:#00f">-</span><span style="color:#06f">9</span>])        
-                   
-\v  (вертикальная табуляция)              
-\t  (табуляция)               
-\r  (перевод каретки)              
-\n  (перевод строки)              
-\f  (перевод страницы)              
-                   
-Наборы    символов               
-[RrGgBb]    <span style="color:#00f">-</span> Соответствие указанным символам            
-[a<span style="color:#00f">-</span>z]   Соответствие символам английского алфавита в нижнем регистре         
-[<span style="color:#06f">0</span><span style="color:#00f">-</span><span style="color:#06f">9</span>]   Соответствие указанным цифрам             
-[^<span style="color:#06f">0</span><span style="color:#00f">-</span><span style="color:#06f">9</span>]  Соответствие с чем угодно кроме цифр заданного диапазона        
-                   
-Квантификатор  (Кванторы)               
-<span style="color:#00f">+</span>   Один или несколько символов            
-<span style="color:#00f">*</span>   ноль и более символов            
-?   ноль или одно вхождение            
-                   
-Интервалы                 
-{<span style="color:#06f">3</span>} точное количество совпадений             
-{<span style="color:#06f">2</span>,<span style="color:#06f">3</span>}   диапазон               
-{<span style="color:#06f">3</span>,}    не менее              
-{,<span style="color:#06f">3</span>}    не более    
-</pre>
-
-
 
 
 

@@ -20,8 +20,21 @@ log: LItvinovsk
 pass: naiz1516010
 mail: kasjdflaskdg@ukr.net
  -->
+ 
+ <!doctype html>
+ <html lang="en">
+ <head>
+ 	<meta charset="UTF-8">
+ 	<title>Document</title>
+ </head>
+ <body>
+ 	
+ </body>
+ </html>
+ 
 <script>
-
+var v = console;
+/*
 var a = prompt("День недели", a)
 switch (a){
 	case "1":
@@ -302,6 +315,58 @@ else {
 {3,}	не менее              
 {,3}	не более              
 
+	
+
+	
+	
+	
+	function Model(){
+		//this
+	}
+	
+	Model.prototype.sum = function(a,b){
+		this.sum = a+b;
+		return this.sum;
+	}
+	
+	function View(){
+		this.tag = document.getElementsByTagName('body')[0]
+	}
+	
+	View.prototype.see  = function(a){
+		this.tag.innerHTML = a;
+	}
+	
+	
+
+	
+	//v.log(x)
+	//v.log(y)
+	
+	function con(){
+		this.x = new Model()
+		this.y = new View()
+		//v.log(x.sum)
+		this.y.see(this.x.sum(5,7))
+	}
+	
+	con()
+
+
+	var a = +prompt("введите первое число")
+	var b = +prompt("введите второе число")
+	alert(a+b)
+*/		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
