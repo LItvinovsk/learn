@@ -101,22 +101,10 @@ mail: kasjdflaskdg@ukr.net
 <<<<<<< HEAD
 
 =======
- -->
+
  
- <!doctype html>
- <html lang="en">
- <head>
- 	<meta charset="UTF-8">
- 	<title>Document</title>
- </head>
- <body>
- 	
- </body>
- </html>
- 
->>>>>>> e6ee00c3b7698f999054895d853f6837b7a94b8d
-<script>
-var v = console;
+
+
 /*
 var a = prompt("День недели", a)
 switch (a){
@@ -440,22 +428,117 @@ else {
 	var b = +prompt("введите второе число")
 	alert(a+b)
 */		
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn-msg">Show message</button>
+<button id="btn-generate">Generate item</button>
+<p><strong id="tag">Tag:</strong></p>
+<ul>
+  <li>Item 1</li>
+  <li>Item 2</li>
+</ul>
+
+
+
+<script>
+window.addEventListener("DOMContentLoaded", function() {
+    var ul = document.querySelector("ul"),
+        btn = document.querySelector("#btn-generate");
+    btn.addEventListener("click", function(e) {
+        ul.dispatchEvent(myEvent);
+    });
+    ul.addEventListener("addItem", function(e) {
+        this.appendChild(e.detail.li);
+    });
+    var myEvent = new CustomEvent("addItem", {
+        detail: {
+            counter: 2,
+            get li() {
+                var node = document.createElement("li");
+                node.appendChild(document.createTextNode("Item " + ++this.counter));
+                return node;
+            }
+        },
+        bubbles: true,
+        cancelable: false
+    });
+});
+</script>
+</body>
+</html>
+
+
+<html>
+<button id="b">Автокнопка</button>
+</html>
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+<script>
+	b.onclick = function() {console.log("НАЖАТО")};
+	let ev = new Event("click");
+	b.dispatchEvent(ev);
 	
 </script>
- -->
+
+	 
+	 <html>
+	 <button id="b" >Add</button>
+	 </html>
+		<ul id="u"></ul>
+	<script>
+			let count = 1;	
+		b.addEventListener("click", function(){		
+	//	console.log('123')		
+			let li = document.createElement("li");
+			li.className = "myli";
+			li.innerHTML = "Item " + count++
+			u.appendChild(li);
+			
+		[].forEach.call( document.getElementsByClassName("myli"), function(li){
+
+			li.addEventListener("click", function(){
+			console.log(li)			
+				li.parentNode.removeChild(li);
+			} );
+		} );		
+		} );
+	</script>
+	 -->
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
