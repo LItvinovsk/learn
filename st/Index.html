@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Super table</title>
+		
+		<script>
+		(function (w, doc,co) {
+			// http://stackoverflow.com/questions/901115/get-query-string-values-in-javascript
+			var u = {},
+				e,
+				a = /\+/g,  // Regex for replacing addition symbol with a space
+				r = /([^&=]+)=?([^&]*)/g,
+				d = function (s) { return decodeURIComponent(s.replace(a, " ")); },
+				q = w.location.search.substring(1),
+				v = '2.0.3';
+
+			while (e = r.exec(q)) {
+				u[d(e[1])] = d(e[2]);
+			}
+			
+			if (!!u.jquery) {
+				v = u.jquery;
+			}	
+
+			doc.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/'+v+'/jquery.min.js">' + "<" + '/' + 'script>');
+			co.log('\nLoading jQuery v' + v + '\n');
+		})(window, document, console);
+		</script>
+		<!--script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script-->
+		<script src="./src/jquery.quicksearch.js"></script>
+		<script>
+			$(document).ready(function () {
+				$("#id_search").quicksearch("table tbody tr", {
+					noResults: '#noresults',
+					stripeRows: ['odd', 'even'],
+					loader: 'span.loading',
+					minValLength: 2
+				});
+			});
+		</script>
+		<link rel="stylesheet" href="style.css" type="text/css" media="all" title="" />
+	</head>
+
+	<body id="tools">
+	
+		<form action="#">
+			<fieldset>
+				<input type="search" name="search" value="" id="id_search" /> <span class="loading">Loading...</span>
+			</fieldset>
+		</form>	
+		
+<table id="matrix" cellpadding="0" cellspacing="0">
+<thead>
+<tr>
+<th width="5%">Код</th>
+<th width="55%">Товар</th>
+<th width="10%">На складе</th>
+<th width="10%">Резерв</th>
+<th width="10%">Свободный</th>
+<th width="10%">в упаковке</th>
+
+</tr>
+</thead>
+
+<tbody>
+	<tr id="noresults">
+		<td colspan="6">No Results</td>
+	</tr>
+	
+<tr><th>6155217</th><td>kitware TRAMONTINA Barbecue 8пр папка(нож-3шт,вил,щип,мусат,дост)цв.уп</td><td>2587</td><td>1520</td><td>2451</td><td>200</td></tr>
+<tr><th>6346681</th><td>kitware TRAMONTINA Barbecue 8пр папка(нож-3шт,вил,щип,мусат,дост)цв.уп</td><td>2587</td><td>1520</td><td>2451</td><td>200</td></tr>
+<tr><th>6360709</th><td>kitware TRAMONTINA Barbecue 8пр папка(нож-3шт,вил,щип,мусат,дост)цв.уп</td><td>2587</td><td>1520</td><td>2451</td><td>200</td></tr>
+
+	
+</tbody>
+</table>
+
+
+</body>
+</html>
